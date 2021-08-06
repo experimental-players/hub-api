@@ -1,13 +1,11 @@
 package org.experimentalplayers.hubapi.controllers;
 
-import org.experimentalplayers.hubapi.Mappings;
+import org.experimentalplayers.hubapi.config.ApplicationMappings;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(Mappings.APPLICATION_ROOT)
+@RequestMapping(ApplicationMappings.ROOT)
 public class ApplicationController {
-
-
 
 }
