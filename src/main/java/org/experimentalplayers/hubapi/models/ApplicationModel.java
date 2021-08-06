@@ -3,6 +3,7 @@ package org.experimentalplayers.hubapi.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -32,5 +33,7 @@ public class ApplicationModel {
 	@Column(name = "color")
 	private String color;
 
+	@OneToMany(mappedBy = "application")
+	private Set<ProjectModel> projects;
 
 }

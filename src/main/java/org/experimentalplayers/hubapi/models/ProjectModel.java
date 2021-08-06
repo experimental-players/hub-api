@@ -5,8 +5,8 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
 @Data
+@Entity
 @Table(name = "projects")
 public class ProjectModel {
 
@@ -34,6 +34,6 @@ public class ProjectModel {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_app")
-	private ApplicationModel idApplication;
+	private ApplicationModel application;
 
 }
