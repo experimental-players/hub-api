@@ -1,5 +1,6 @@
 package org.experimentalplayers.hubapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -32,6 +33,7 @@ public class ProjectModel {
 	@Column(name = "url_github")
 	private String urlGit;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_app")
 	private ApplicationModel application;

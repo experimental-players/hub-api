@@ -1,5 +1,6 @@
 package org.experimentalplayers.hubapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class ApplicationModel {
 	@Column(name = "color")
 	private String color;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "application")
 	private Set<ProjectModel> projects;
 
