@@ -1,0 +1,6 @@
+org.experimentalplayers.hubapi
+org.experimentalplayers.hubapi.config
+org.experimentalplayers.hubapi.controllers
+org.experimentalplayers.hubapi.exceptions
+org.experimentalplayers.hubapi.models
+org.experimentalplayers.hubapi.repositories

@@ -35,7 +35,7 @@ public class ApplicationController {
 	 *
 	 * @param page    Not implemented yet, the page number if there are more elements than maxSize
 	 * @param maxSize Not implemented yet, the max elements to retrieve in a call
-	 * @return An {@link Iterable<ApplicationModel>} containing all the elements retrieved
+	 * @return An {@link Iterable} containing all the elements retrieved
 	 */
 	@GetMapping(ApplicationMappings.FIND_ALL)
 	public Iterable<ApplicationModel> findAll(@RequestParam(defaultValue = "1") int page,
