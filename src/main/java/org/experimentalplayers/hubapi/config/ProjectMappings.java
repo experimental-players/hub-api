@@ -1,15 +1,18 @@
 package org.experimentalplayers.hubapi.config;
 
+import org.experimentalplayers.hubapi.controllers.ProjectController;
+import org.experimentalplayers.hubapi.models.ProjectModel;
+
 /**
- * Mappings for {@link org.experimentalplayers.hubapi.controllers.ProjectController ProjectController},
+ * Mappings for {@link ProjectController},
  * listed in this class as constants for easy and detailed access.
  */
 public abstract class ProjectMappings {
 
 	/**
-	 * The root location to access the {@link org.experimentalplayers.hubapi.models.ProjectModel Project} API.
+	 * The root location to access the {@link ProjectModel Project} API.
 	 *
-	 * @see org.experimentalplayers.hubapi.controllers.ProjectController ProjectController
+	 * @see ProjectController
 	 */
 	public static final String ROOT = "/project";
 

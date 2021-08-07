@@ -14,6 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+/**
+ * <h2>Application sub-API</h2>
+ * <p>
+ * The REST controller that listens for every {@link ProjectModel Project} query.
+ * <br><br>
+ * This controller listens on {@link ProjectMappings#ROOT this} path,
+ * so the endpoint for all mapped methods will be /{@link ProjectMappings#ROOT PROJECT_ROOT}/METHOD_MAPPING (with no trailing slash).
+ * </p>
+ */
 @Slf4j
 @RestController
 @RequestMapping(ProjectMappings.ROOT)

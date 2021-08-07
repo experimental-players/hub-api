@@ -1,15 +1,18 @@
 package org.experimentalplayers.hubapi.config;
 
+import org.experimentalplayers.hubapi.controllers.ApplicationController;
+import org.experimentalplayers.hubapi.models.ApplicationModel;
+
 /**
- * Mappings for {@link org.experimentalplayers.hubapi.controllers.ApplicationController ApplicationController},
+ * Mappings for {@link ApplicationController},
  * listed in this class as constants for easy and detailed access.
  */
 public abstract class ApplicationMappings {
 
 	/**
-	 * The root location to access the {@link org.experimentalplayers.hubapi.models.ApplicationModel Application} API.
+	 * The root location to access the {@link ApplicationModel Application} API.
 	 *
-	 * @see org.experimentalplayers.hubapi.controllers.ApplicationController ApplicationController
+	 * @see ApplicationController
 	 */
 	public static final String ROOT = "/application";
 
