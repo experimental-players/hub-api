@@ -1,25 +1,26 @@
 package org.experimentalplayers.hubapi.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
-import java.util.Objects;
 
 @Configuration
 public class ConfigBeans {
 
 	@Bean
-	public DataSource getDatasource() {
+	public DataSource getDatasource(@Value("${DATASOURCE_URL}") String url,
+			@Value("${DATASOURCE_USERNAME}") String username, @Value("${DATASOURCE_PASSWORD}") String password) {
 
 		return DataSourceBuilder.create()
 				.type(HikariDataSource.class)
 				.driverClassName("org.postgresql.Driver")
-				.url(Objects.requireNonNull(System.getenv("DATASOURCE_URL")))
-				.username(Objects.requireNonNull(System.getenv("DATASOURCE_USERNAME")))
-				.password(Objects.requireNonNull(System.getenv("DATASOURCE_PASSWORD")))
+				.url(url)
+				.username(username)
+				.password(password)
 				.build();
 
 	}
