@@ -15,7 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
-import static org.experimentalplayers.hubapi.config.ApplicationMappings.*;
+import static org.experimentalplayers.hubapi.config.CategoryMappings.*;
 import static org.hamcrest.Matchers.isA;
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith({ RestDocumentationExtension.class, SpringExtension.class })
 @SpringBootTest
-class ApplicationTests {
+class CategoryTests {
 
 	private MockMvc mockMvc;
 
@@ -55,7 +55,7 @@ class ApplicationTests {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$", isA(List.class)))
-				.andDo(document("application"));
+				.andDo(document("category"));
 	}
 
 	@Test
@@ -68,16 +68,16 @@ class ApplicationTests {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id",
 						matchesPattern("[0-9a-f]{8}-[0-9a-f]{4}-[34][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")))
-				.andDo(document("application",
-						pathParameters(parameterWithName("name").description("The Application's codename")),
-						responseFields(fieldWithPath("id").description("The Application's name")
+				.andDo(document("category",
+						pathParameters(parameterWithName("name").description("The Category's codename")),
+						responseFields(fieldWithPath("id").description("The Category's name")
 										.type(JsonFieldType.STRING),
 								fieldWithPath("nameShort").description(
-												"The Application's codename. The codename is a short lower-kebab case name similar to the original one")
+												"The Category's codename. The codename is a short lower-kebab case name similar to the original one")
 										.type(JsonFieldType.STRING),
-								fieldWithPath("nameLong").description("The Application's original name")
+								fieldWithPath("nameLong").description("The Category's original name")
 										.type(JsonFieldType.STRING),
-								fieldWithPath("description").description("The Application's description")
+								fieldWithPath("description").description("The Category's description")
 										.type(JsonFieldType.STRING),
 								fieldWithPath("urlLogo").description("A URL to an eventual application icon")
 										.type(JsonFieldType.STRING)

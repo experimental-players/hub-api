@@ -3,16 +3,16 @@
 This is an example output for a service running at http://localhost:8080:
 
 .request
-include::{snippets}/application/http-request.adoc[]
+include::{snippets}/category/http-request.adoc[]
 
 .response
-include::{snippets}/application/http-response.adoc[]
+include::{snippets}/category/http-response.adoc[]
 
 == Endpoints
 
 === Application
 
-include::{snippets}/application/path-parameters.adoc[]
-include::{snippets}/application/response-fields.adoc[]
+include::{snippets}/category/path-parameters.adoc[]
+include::{snippets}/category/response-fields.adoc[]
 
 As you can see the format is very simple, and in fact you always get the same message.

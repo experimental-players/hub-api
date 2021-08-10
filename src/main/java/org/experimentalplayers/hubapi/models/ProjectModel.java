@@ -1,12 +1,16 @@
 package org.experimentalplayers.hubapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.UUID;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Data
+@JsonInclude(Include.NON_NULL)
 @Entity
 @Table(name = "projects")
 public class ProjectModel {
@@ -35,7 +39,7 @@ public class ProjectModel {
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_app")
-	private ApplicationModel application;
+	@JoinColumn(name = "id_cat")
+	private CategoryModel application;
 
 }

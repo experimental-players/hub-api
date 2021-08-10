@@ -1,6 +1,6 @@
 package org.experimentalplayers.hubapi.repositories;
 
-import org.experimentalplayers.hubapi.models.ApplicationModel;
+import org.experimentalplayers.hubapi.models.CategoryModel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,8 +8,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ApplicationRepository extends CrudRepository<ApplicationModel, UUID> {
+public interface CategoryRepository extends CrudRepository<CategoryModel, UUID> {
 
-	Optional<ApplicationModel> findByNameShort(String shortName);
+	Optional<CategoryModel> findByNameShort(String shortName);
 
 }

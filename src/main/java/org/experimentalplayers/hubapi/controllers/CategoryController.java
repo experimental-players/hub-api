@@ -1,10 +1,10 @@
 package org.experimentalplayers.hubapi.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.experimentalplayers.hubapi.config.ApplicationMappings;
+import org.experimentalplayers.hubapi.config.CategoryMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
-import org.experimentalplayers.hubapi.models.ApplicationModel;
-import org.experimentalplayers.hubapi.repositories.ApplicationRepository;
+import org.experimentalplayers.hubapi.models.CategoryModel;
+import org.experimentalplayers.hubapi.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,19 +13,19 @@ import java.util.Optional;
 /**
  * <h2>Application sub-API</h2>
  * <p>
- * The REST controller that listens for every {@link ApplicationModel Application} query.
+ * The REST controller that listens for every {@link CategoryModel Application} query.
  * <br><br>
- * This controller listens on {@link ApplicationMappings#ROOT this} path,
- * so the endpoint for all mapped methods will be /{@link ApplicationMappings#ROOT APPLICATION_ROOT}/METHOD_MAPPING (with no trailing slash).
+ * This controller listens on {@link CategoryMappings#ROOT this} path,
+ * so the endpoint for all mapped methods will be /{@link CategoryMappings#ROOT APPLICATION_ROOT}/METHOD_MAPPING (with no trailing slash).
  * </p>
  */
 @Slf4j
 @RestController
-@RequestMapping(ApplicationMappings.ROOT)
-public class ApplicationController {
+@RequestMapping(CategoryMappings.ROOT)
+public class CategoryController {
 
 	@Autowired
-	private ApplicationRepository appRepo;
+	private CategoryRepository appRepo;
 
 	/**
 	 * Find all applications.
@@ -37,18 +37,18 @@ public class ApplicationController {
 	 * @param maxSize Not implemented yet, the max elements to retrieve in a call
 	 * @return An {@link Iterable} containing all the elements retrieved
 	 */
-	@GetMapping(ApplicationMappings.FIND_ALL)
-	public Iterable<ApplicationModel> findAll(@RequestParam(defaultValue = "1") int page,
+	@GetMapping(CategoryMappings.FIND_ALL)
+	public Iterable<CategoryModel> findAll(@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int maxSize) {
 
 		return appRepo.findAll();
 
 	}
 
-	@GetMapping(ApplicationMappings.FIND_BY_NAME)
-	public ApplicationModel findByName(@PathVariable String name) throws NotFoundException {
+	@GetMapping(CategoryMappings.FIND_BY_NAME)
+	public CategoryModel findByName(@PathVariable String name) throws NotFoundException {
 
-		Optional<ApplicationModel> opt = appRepo.findByNameShort(name);
+		Optional<CategoryModel> opt = appRepo.findByNameShort(name);
 
 		if(!opt.isPresent())
 			throw new NotFoundException();

@@ -1,19 +1,23 @@
 package org.experimentalplayers.hubapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Data
+@JsonInclude(Include.NON_NULL)
 @Entity
-@Table(name = "applications")
-public class ApplicationModel {
+@Table(name = "categories")
+public class CategoryModel {
 
 	@Id
-	@Column(name = "id_app")
+	@Column(name = "id_cat")
 	private UUID id;
 
 	@Column(name = "name_short")
