@@ -1,4 +1,10 @@
-= Getting Started With Spring REST Docs
+= [Experimental Players] HUB API
+Version @project.version@
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: My Content
+
 
 This is an example output for a service running at http://localhost:8080:
 

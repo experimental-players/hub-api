@@ -112,13 +112,38 @@
 							<goal>process-asciidoc</goal>
 						</goals>
 						<configuration>
-							<sourceDocumentName>index.adoc</sourceDocumentName>
-							<outputDirectory>${project.basedir}/docs</outputDirectory>
 							<backend>html</backend>
 							<doctype>book</doctype>
+							<sourceDirectory>${project.build.directory}/docs</sourceDirectory>
+							<outputDirectory>${project.basedir}/docs</outputDirectory>
 							<attributes>
 								<snippets>${project.build.directory}/generated-snippets</snippets>
 							</attributes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Filter asciidoc pages -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/docs</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/src/main/asciidoc</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
 						</configuration>
 					</execution>
 				</executions>
