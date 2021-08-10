@@ -35,4 +35,4 @@ build/
 /.mvn/
 /mvnw
 /mvnw.cmd
-/src/test/resources/application.properties
+**.env

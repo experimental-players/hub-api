@@ -46,7 +46,7 @@ public class ApplicationController {
 	}
 
 	@GetMapping(ApplicationMappings.FIND_BY_NAME)
-	public ApplicationModel findByName(@PathVariable String name) {
+	public ApplicationModel findByName(@PathVariable String name) throws NotFoundException {
 
 		Optional<ApplicationModel> opt = appRepo.findByNameShort(name);
 

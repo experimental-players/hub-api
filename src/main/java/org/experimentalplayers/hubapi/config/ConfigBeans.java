@@ -12,8 +12,9 @@ import javax.sql.DataSource;
 public class ConfigBeans {
 
 	@Bean
-	public DataSource getDatasource(@Value("${DATASOURCE_URL}") String url,
-			@Value("${DATASOURCE_USERNAME}") String username, @Value("${DATASOURCE_PASSWORD}") String password) {
+	public DataSource getDatasource(@Value("${application.datasource.url}") String url,
+			@Value("${application.datasource.username}") String username,
+			@Value("${application.datasource.password}") String password) {
 
 		return DataSourceBuilder.create()
 				.type(HikariDataSource.class)

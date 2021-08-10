@@ -39,7 +39,7 @@ public class ProjectController {
 	}
 
 	@GetMapping(ApplicationMappings.FIND_BY_NAME)
-	public ProjectModel findByName(@PathVariable String name) {
+	public ProjectModel findByName(@PathVariable String name) throws NotFoundException {
 
 		Optional<ProjectModel> opt = projRepo.findByNameShort(name);
 
