@@ -2,14 +2,21 @@ package org.experimentalplayers.hubapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
 @JsonInclude(Include.NON_NULL)
 @Entity
 @Table(name = "projects")
@@ -37,9 +44,28 @@ public class ProjectModel {
 	@Column(name = "url_github")
 	private String urlGit;
 
+	@Column(name = "color")
+	private String color;
+
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_cat")
-	private CategoryModel application;
+	private CategoryModel category;
+
+	@Override
+	public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
+			return false;
+		ProjectModel that = (ProjectModel) o;
+
+		return Objects.equals(id, that.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return 1716954588;
+	}
 
 }

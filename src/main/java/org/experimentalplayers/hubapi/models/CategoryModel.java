@@ -2,15 +2,22 @@ package org.experimentalplayers.hubapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
 @JsonInclude(Include.NON_NULL)
 @Entity
 @Table(name = "categories")
@@ -39,7 +46,24 @@ public class CategoryModel {
 	private String color;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "application")
+	@OneToMany(mappedBy = "category")
+	@ToString.Exclude
 	private Set<ProjectModel> projects;
+
+	@Override
+	public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
+			return false;
+		CategoryModel that = (CategoryModel) o;
+
+		return Objects.equals(id, that.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return 977141811;
+	}
 
 }
