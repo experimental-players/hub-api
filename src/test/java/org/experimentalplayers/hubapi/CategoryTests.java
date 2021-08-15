@@ -1,5 +1,6 @@
 package org.experimentalplayers.hubapi;
 
+import org.experimentalplayers.hubapi.config.CommonDescriptors;
 import org.experimentalplayers.hubapi.config.TestMockValues;
 import org.experimentalplayers.hubapi.models.CategoryModel;
 import org.experimentalplayers.hubapi.models.ProjectModel;
@@ -24,18 +25,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import static org.experimentalplayers.hubapi.config.CategoryMappings.*;
-import static org.hamcrest.Matchers.isA;
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -62,8 +62,11 @@ class CategoryTests {
 	@BeforeEach
 	public void setUp(WebApplicationContext webApplicationContext, RestDocumentationContextProvider restDocumentation) {
 
-		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-				.apply(documentationConfiguration(restDocumentation))
+		mockMvc = MockMvcBuilders
+				.webAppContextSetup(webApplicationContext)
+				.apply(documentationConfiguration(restDocumentation)
+						.operationPreprocessors()
+						.withResponseDefaults(prettyPrint()))
 				.build();
 
 		TestMockValues mockValues = TestMockValues.create();
@@ -73,55 +76,54 @@ class CategoryTests {
 		when(catRepo.findAll()).thenReturn(mockCategories.values());
 		when(projRepo.findAll()).thenReturn(mockProjects.values());
 
-		when(catRepo.findByNameShort(anyString())).thenAnswer(invocation -> Optional.of(mockCategories.get(invocation.getArgument(
+		when(catRepo.findByCodename(anyString())).thenAnswer(invocation -> Optional.of(mockCategories.get(invocation.getArgument(
 				0,
 				String.class))));
 
 	}
 
 	@Test
-	public void findAll() throws Exception {
+	public void findAllCategories() throws Exception {
 
 		final String endpoint = ROOT + FIND_ALL;
 
-		mockMvc.perform(get(endpoint))
+		mockMvc
+				.perform(get(endpoint))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$", isA(List.class)))
-				.andDo(document("category"));
+				.andDo(document("find-all-categories",
+						responseFields(fieldWithPath("page")
+										.description("Number of page")
+										.type(JsonFieldType.NUMBER),
+								fieldWithPath("limit")
+										.description("Max items in a page")
+										.type(JsonFieldType.NUMBER),
+								fieldWithPath("maxPage")
+										.description("Max pages")
+										.type(JsonFieldType.NUMBER)
+										// TODO: IMPLEMENT PAGES COUNT
+										.optional(),
+								fieldWithPath("result")
+										.description("Fetched items")
+										.type(JsonFieldType.ARRAY))
+								// COMMENT TO KEEP INDENT BC INTELLIJ'S CODE FORMATTER IS BROKEN
+								.andWithPrefix("result[].", CommonDescriptors.CATEGORY_FIELDS)));
 	}
 
 	@Test
-	public void findByName() throws Exception {
+	public void findCategoryByCodename() throws Exception {
 
 		final String endpoint = ROOT + FIND_BY_NAME;
 
-		mockMvc.perform(get(endpoint, "minecraft"))
+		mockMvc
+				.perform(get(endpoint, "minecraft"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id",
 						matchesPattern("[0-9a-f]{8}-[0-9a-f]{4}-[34][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")))
-				.andDo(document("category",
-						pathParameters(parameterWithName("name").description("The Category's codename")),
-						responseFields(fieldWithPath("id").description("The Category's name")
-										.type(JsonFieldType.STRING),
-								fieldWithPath("nameShort").description(
-												"The Category's codename. The codename is a short lower-kebab case name similar to the original one")
-										.type(JsonFieldType.STRING),
-								fieldWithPath("nameLong").description("The Category's original name")
-										.type(JsonFieldType.STRING),
-								fieldWithPath("description").description("The Category's description")
-										.type(JsonFieldType.STRING),
-								fieldWithPath("urlLogo").description("A URL to an eventual application icon")
-										.type(JsonFieldType.STRING)
-										.optional(),
-								fieldWithPath("urlBg").description("A URL to an eventual background image")
-										.type(JsonFieldType.STRING)
-										.optional(),
-								fieldWithPath("color").description(
-												"An eventual hex-code for a color matching the Application's theme")
-										.type(JsonFieldType.STRING)
-										.optional())));
+				.andDo(document("find-category-by-codename",
+						pathParameters(parameterWithName("name").description("Category's codename")),
+						responseFields(CommonDescriptors.CATEGORY_FIELDS)));
 
 	}
 
