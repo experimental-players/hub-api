@@ -80,10 +80,6 @@ class CategoryTests {
 	}
 
 	@Test
-	void contextLoads() {
-	}
-
-	@Test
 	public void findAll() throws Exception {
 
 		final String endpoint = ROOT + FIND_ALL;
