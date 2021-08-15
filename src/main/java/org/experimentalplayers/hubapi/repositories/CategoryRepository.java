@@ -10,6 +10,6 @@ import java.util.UUID;
 @Repository
 public interface CategoryRepository extends CrudRepository<CategoryModel, UUID> {
 
-	Optional<CategoryModel> findByNameShort(String shortName);
+	Optional<CategoryModel> findByCodename(String codename);
 
 }

@@ -41,7 +41,7 @@ public class ProjectController {
 	@GetMapping(CategoryMappings.FIND_BY_NAME)
 	public ProjectModel findByName(@PathVariable String name) throws NotFoundException {
 
-		Optional<ProjectModel> opt = projRepo.findByNameShort(name);
+		Optional<ProjectModel> opt = projRepo.findByCodename(name);
 
 		if(!opt.isPresent())
 			throw new NotFoundException();

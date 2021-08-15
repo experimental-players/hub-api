@@ -10,6 +10,6 @@ import java.util.UUID;
 @Repository
 public interface ProjectRepository extends CrudRepository<ProjectModel, UUID> {
 
-	Optional<ProjectModel> findByNameShort(String shortName);
+	Optional<ProjectModel> findByCodename(String shortName);
 
 }

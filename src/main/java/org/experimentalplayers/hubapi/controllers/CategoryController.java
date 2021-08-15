@@ -5,6 +5,8 @@ import org.experimentalplayers.hubapi.config.CategoryMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.CategoryModel;
 import org.experimentalplayers.hubapi.repositories.CategoryRepository;
+import org.experimentalplayers.hubapi.responses.CollectionResponse;
+import org.experimentalplayers.hubapi.responses.CollectionResponse.CollectionResponseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +27,7 @@ import java.util.Optional;
 public class CategoryController {
 
 	@Autowired
-	private CategoryRepository appRepo;
+	private CategoryRepository catRepo;
 
 	/**
 	 * Find all applications.
@@ -33,22 +35,34 @@ public class CategoryController {
 	 * <br>
 	 * This endpoint only accepts GET requests, a 405 MethodNotAllowed response will be sent for other HTTP methods.
 	 *
-	 * @param page    Not implemented yet, the page number if there are more elements than maxSize
-	 * @param maxSize Not implemented yet, the max elements to retrieve in a call
+	 * @param page  Not implemented yet, the page number if there are more elements than limit
+	 * @param limit Not implemented yet, the max elements to retrieve in a call
 	 * @return An {@link Iterable} containing all the elements retrieved
 	 */
 	@GetMapping(CategoryMappings.FIND_ALL)
-	public Iterable<CategoryModel> findAll(@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "10") int maxSize) {
+	public CollectionResponse findAll(@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "10") int limit) {
 
-		return appRepo.findAll();
+		// TODO: PAGEABLE
+
+		CollectionResponseBuilder responseBuilder = CollectionResponse
+				.builder()
+				.limit(limit)
+				.page(page);
+
+		for(CategoryModel category : catRepo.findAll())
+			responseBuilder.result(category);
+
+		System.out.println(responseBuilder.toString());
+
+		return responseBuilder.build();
 
 	}
 
 	@GetMapping(CategoryMappings.FIND_BY_NAME)
 	public CategoryModel findByName(@PathVariable String name) throws NotFoundException {
 
-		Optional<CategoryModel> opt = appRepo.findByNameShort(name);
+		Optional<CategoryModel> opt = catRepo.findByCodename(name);
 
 		if(!opt.isPresent())
 			throw new NotFoundException();
