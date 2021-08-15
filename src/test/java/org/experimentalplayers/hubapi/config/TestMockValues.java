@@ -13,8 +13,8 @@ public class TestMockValues {
 
 	public static final CategoryModelBuilder BUILDER_MINECRAFT = CategoryModel.builder()
 			.id(UUID.fromString("2805fc7e-c22f-413d-8d94-8c2929704712"))
-			.nameShort("minecraft")
-			.nameLong("Minecraft Plugins")
+			.codename("minecraft")
+			.fullname("Minecraft Plugins")
 			.description("# Some Minecraft Plugins description")
 			.urlBg(null)
 			.urlBg(null)
@@ -23,8 +23,8 @@ public class TestMockValues {
 
 	public static final CategoryModelBuilder BUILDER_DISCORD = CategoryModel.builder()
 			.id(UUID.fromString("b210049b-b9a3-4f07-acdd-48c0aeae8f57"))
-			.nameShort("discord")
-			.nameLong("Discord Bots")
+			.codename("discord")
+			.fullname("Discord Bots")
 			.description("# Some Discord Bots description")
 			.urlBg(null)
 			.urlBg(null)
@@ -33,8 +33,8 @@ public class TestMockValues {
 
 	public static final ProjectModelBuilder BUILDER_UHC = ProjectModel.builder()
 			.id(UUID.fromString("c892aeda-bd52-4fce-9209-06f536470342"))
-			.nameShort("xkuhc")
-			.nameLong("xkUHC")
+			.codename("xkuhc")
+			.fullname("xkUHC")
 			.description("# Some UHC description")
 			.urlBg(null)
 			.urlBg(null)
@@ -43,8 +43,8 @@ public class TestMockValues {
 
 	public static final ProjectModelBuilder BUILDER_DEATHSWAP = ProjectModel.builder()
 			.id(UUID.fromString("554af97c-19df-4072-963b-6c9bbd6d700b"))
-			.nameShort("xkds")
-			.nameLong("xkDeathSwap")
+			.codename("xkds")
+			.fullname("xkDeathSwap")
 			.description("# Some DeathSwap description")
 			.urlBg(null)
 			.urlBg(null)
@@ -53,8 +53,8 @@ public class TestMockValues {
 
 	public static final ProjectModelBuilder BUILDER_VGREETER = ProjectModel.builder()
 			.id(UUID.fromString("81f100af-a95e-4e8d-946b-b1163807941b"))
-			.nameShort("vgreeter")
-			.nameLong("VGreeter")
+			.codename("vgreeter")
+			.fullname("VGreeter")
 			.description("# Some Faina description")
 			.urlBg(null)
 			.urlBg(null)
@@ -63,8 +63,8 @@ public class TestMockValues {
 
 	public static final ProjectModelBuilder BUILDER_MINCHIABBOT = ProjectModel.builder()
 			.id(UUID.fromString("b94add28-6e45-4185-9ce4-42617cae25ff"))
-			.nameShort("minchiabbot")
-			.nameLong("Minchiabbot")
+			.codename("minchiabbot")
+			.fullname("Minchiabbot")
 			.description("# Some Minchiabbot description")
 			.urlBg(null)
 			.urlBg(null)
@@ -86,12 +86,12 @@ public class TestMockValues {
 		bindCategory(minecraft, uhc, deathswap);
 		bindCategory(discord, vgreeter, minchiabbot);
 
-		mockCats.put(minecraft.getNameShort(), minecraft);
-		mockCats.put(discord.getNameShort(), discord);
-		mockProjs.put(uhc.getNameShort(), uhc);
-		mockProjs.put(deathswap.getNameShort(), deathswap);
-		mockProjs.put(vgreeter.getNameShort(), vgreeter);
-		mockProjs.put(minchiabbot.getNameShort(), minchiabbot);
+		mockCats.put(minecraft.getCodename(), minecraft);
+		mockCats.put(discord.getCodename(), discord);
+		mockProjs.put(uhc.getCodename(), uhc);
+		mockProjs.put(deathswap.getCodename(), deathswap);
+		mockProjs.put(vgreeter.getCodename(), vgreeter);
+		mockProjs.put(minchiabbot.getCodename(), minchiabbot);
 
 		return new TestMockValues(mockCats, mockProjs);
 

@@ -26,11 +26,11 @@ public class ProjectModel {
 	@Column(name = "id_proj")
 	private UUID id;
 
-	@Column(name = "name_short")
-	private String nameShort;
+	@Column(name = "codename")
+	private String codename;
 
-	@Column(name = "name_long")
-	private String nameLong;
+	@Column(name = "fullname")
+	private String fullname;
 
 	@Column(name = "description")
 	private String description;
@@ -61,11 +61,6 @@ public class ProjectModel {
 		ProjectModel that = (ProjectModel) o;
 
 		return Objects.equals(id, that.id);
-	}
-
-	@Override
-	public int hashCode() {
-		return 1716954588;
 	}
 
 }
