@@ -51,6 +51,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 })
 class CategoryTests {
 
+	// TODO: TEST PAGEABLE
+
 	@MockBean
 	private CategoryRepository catRepo;
 

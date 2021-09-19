@@ -8,6 +8,7 @@ import org.experimentalplayers.hubapi.repositories.CategoryRepository;
 import org.experimentalplayers.hubapi.responses.CollectionResponse;
 import org.experimentalplayers.hubapi.responses.CollectionResponse.CollectionResponseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -43,14 +44,14 @@ public class CategoryController {
 	public CollectionResponse findAll(@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int limit) {
 
-		// TODO: PAGEABLE
+		PageRequest request = PageRequest.of(page, limit);
 
 		CollectionResponseBuilder responseBuilder = CollectionResponse
 				.builder()
 				.limit(limit)
 				.page(page);
 
-		for(CategoryModel category : catRepo.findAll())
+		for(CategoryModel category : catRepo.findAll(request))
 			responseBuilder.result(category);
 
 		System.out.println(responseBuilder.toString());
