@@ -1,7 +1,7 @@
 package org.experimentalplayers.hubapi.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.experimentalplayers.hubapi.config.ApplicationMappings;
+import org.experimentalplayers.hubapi.config.CategoryMappings;
 import org.experimentalplayers.hubapi.config.ProjectMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.ProjectModel;
@@ -31,17 +31,17 @@ public class ProjectController {
 	@Autowired
 	private ProjectRepository projRepo;
 
-	@GetMapping(ApplicationMappings.FIND_ALL)
+	@GetMapping(CategoryMappings.FIND_ALL)
 	public Iterable<ProjectModel> findAll() {
 
 		return projRepo.findAll();
 
 	}
 
-	@GetMapping(ApplicationMappings.FIND_BY_NAME)
-	public ProjectModel findByName(@PathVariable String name) {
+	@GetMapping(CategoryMappings.FIND_BY_NAME)
+	public ProjectModel findByName(@PathVariable String name) throws NotFoundException {
 
-		Optional<ProjectModel> opt = projRepo.findByNameShort(name);
+		Optional<ProjectModel> opt = projRepo.findByCodename(name);
 
 		if(!opt.isPresent())
 			throw new NotFoundException();

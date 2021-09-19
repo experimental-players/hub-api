@@ -1,0 +1,24 @@
+= [Experimental Players] HUB API
+Version @project.version@
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: My Content
+
+
+This is an example output for a service running at http://localhost:8080:
+
+.request
+include::{snippets}/category/http-request.adoc[]
+
+.response
+include::{snippets}/category/http-response.adoc[]
+
+== Endpoints
+
+=== Application
+
+include::{snippets}/category/path-parameters.adoc[]
+include::{snippets}/category/response-fields.adoc[]
+
+As you can see the format is very simple, and in fact you always get the same message.

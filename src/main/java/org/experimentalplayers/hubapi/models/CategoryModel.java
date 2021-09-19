@@ -7,6 +7,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -19,11 +20,11 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 @ToString
 @JsonInclude(Include.NON_NULL)
 @Entity
-@Table(name = "projects")
-public class ProjectModel {
+@Table(name = "categories")
+public class CategoryModel {
 
 	@Id
-	@Column(name = "id_proj")
+	@Column(name = "id_cat")
 	private UUID id;
 
 	@Column(name = "codename")
@@ -41,16 +42,13 @@ public class ProjectModel {
 	@Column(name = "url_bg")
 	private String urlBg;
 
-	@Column(name = "url_github")
-	private String urlGit;
-
 	@Column(name = "color")
 	private String color;
 
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_cat")
-	private CategoryModel category;
+	@OneToMany(mappedBy = "category")
+	@ToString.Exclude
+	private Set<ProjectModel> projects;
 
 	@Override
 	public boolean equals(Object o) {
@@ -58,7 +56,7 @@ public class ProjectModel {
 			return true;
 		if(o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
 			return false;
-		ProjectModel that = (ProjectModel) o;
+		CategoryModel that = (CategoryModel) o;
 
 		return Objects.equals(id, that.id);
 	}

@@ -6,7 +6,12 @@ The Spring-based application that powers our HUB's API.
 
 The following tools are used:
 
+ [//]: # (TODO: table format with tool description) 
+
 - Spring Boot
 - Spring Web
+- Spring REST docs
 - Hibernate
 - Lombok
+- JUnit 5
+- Mockito
