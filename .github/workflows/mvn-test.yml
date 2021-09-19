@@ -22,3 +22,5 @@ jobs:
         cache: maven
     - name: Build and Test with Maven
       run: mvn -B test -Dfile.encoding=UTF-8 --file pom.xml
+      env:
+        TEST_ENV: true
