@@ -31,14 +31,14 @@ public class ProjectController {
 	@Autowired
 	private ProjectRepository projRepo;
 
-	@GetMapping(CategoryMappings.FIND_ALL)
+	@GetMapping(ProjectMappings.FIND_ALL)
 	public Iterable<ProjectModel> findAll() {
 
 		return projRepo.findAll();
 
 	}
 
-	@GetMapping(CategoryMappings.FIND_BY_NAME)
+	@GetMapping(ProjectMappings.FIND_BY_NAME)
 	public ProjectModel findByName(@PathVariable String name) throws NotFoundException {
 
 		Optional<ProjectModel> opt = projRepo.findByCodename(name);
