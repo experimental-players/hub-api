@@ -2,10 +2,10 @@ package org.experimentalplayers.hubapi;
 
 import org.experimentalplayers.hubapi.config.CommonDescriptors;
 import org.experimentalplayers.hubapi.config.TestMockValues;
-import org.experimentalplayers.hubapi.models.CategoryModel;
-import org.experimentalplayers.hubapi.models.ProjectModel;
-import org.experimentalplayers.hubapi.repositories.CategoryRepository;
-import org.experimentalplayers.hubapi.repositories.ProjectRepository;
+import org.experimentalplayers.hubapi.models.Bot;
+import org.experimentalplayers.hubapi.models.InputType;
+import org.experimentalplayers.hubapi.repositories.BotRepository;
+import org.experimentalplayers.hubapi.repositories.InputTypeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.experimentalplayers.hubapi.config.CategoryMappings.*;
+import static org.experimentalplayers.hubapi.config.BotMappings.*;
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -54,10 +54,10 @@ class CategoryTests {
 	// TODO: TEST PAGEABLE
 
 	@MockBean
-	private CategoryRepository catRepo;
+	private BotRepository catRepo;
 
 	@MockBean
-	private ProjectRepository projRepo;
+	private InputTypeRepository projRepo;
 
 	private MockMvc mockMvc;
 
@@ -72,13 +72,13 @@ class CategoryTests {
 				.build();
 
 		TestMockValues mockValues = TestMockValues.create();
-		Map<String, CategoryModel> mockCategories = mockValues.getCategories();
-		Map<String, ProjectModel> mockProjects = mockValues.getProjects();
+		Map<String, Bot> mockCategories = mockValues.getCategories();
+		Map<String, InputType> mockProjects = mockValues.getProjects();
 
 		when(catRepo.findAll()).thenReturn(mockCategories.values());
 		when(projRepo.findAll()).thenReturn(mockProjects.values());
 
-		when(catRepo.findByCodename(anyString())).thenAnswer(invocation -> Optional.of(mockCategories.get(invocation.getArgument(
+		when(catRepo.findAllByName(anyString())).thenAnswer(invocation -> Optional.of(mockCategories.get(invocation.getArgument(
 				0,
 				String.class))));
 

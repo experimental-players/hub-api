@@ -1,10 +1,10 @@
 package org.experimentalplayers.hubapi.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.experimentalplayers.hubapi.config.CategoryMappings;
+import org.experimentalplayers.hubapi.config.BotMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
-import org.experimentalplayers.hubapi.models.CategoryModel;
-import org.experimentalplayers.hubapi.repositories.CategoryRepository;
+import org.experimentalplayers.hubapi.models.Bot;
+import org.experimentalplayers.hubapi.repositories.BotRepository;
 import org.experimentalplayers.hubapi.responses.CollectionResponse;
 import org.experimentalplayers.hubapi.responses.CollectionResponse.CollectionResponseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +16,19 @@ import java.util.Optional;
 /**
  * <h2>Application sub-API</h2>
  * <p>
- * The REST controller that listens for every {@link CategoryModel Application} query.
+ * The REST controller that listens for every {@link Bot Application} query.
  * <br><br>
- * This controller listens on {@link CategoryMappings#ROOT this} path,
- * so the endpoint for all mapped methods will be /{@link CategoryMappings#ROOT APPLICATION_ROOT}/METHOD_MAPPING (with no trailing slash).
+ * This controller listens on {@link BotMappings#ROOT this} path,
+ * so the endpoint for all mapped methods will be /{@link BotMappings#ROOT APPLICATION_ROOT}/METHOD_MAPPING (with no trailing slash).
  * </p>
  */
 @Slf4j
 @RestController
-@RequestMapping(CategoryMappings.ROOT)
-public class CategoryController {
+@RequestMapping(BotMappings.ROOT)
+public class BotController {
 
 	@Autowired
-	private CategoryRepository catRepo;
+	private BotRepository catRepo;
 
 	/**
 	 * Find all applications.
@@ -40,7 +40,7 @@ public class CategoryController {
 	 * @param limit Not implemented yet, the max elements to retrieve in a call
 	 * @return An {@link Iterable} containing all the elements retrieved
 	 */
-	@GetMapping(CategoryMappings.FIND_ALL)
+	@GetMapping(BotMappings.FIND_ALL)
 	public CollectionResponse findAll(@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "10") int limit) {
 
@@ -51,7 +51,7 @@ public class CategoryController {
 				.limit(limit)
 				.page(page);
 
-		for(CategoryModel category : catRepo.findAll(request))
+		for(Bot category : catRepo.findAll(request))
 			responseBuilder.result(category);
 
 		System.out.println(responseBuilder.toString());
@@ -60,10 +60,10 @@ public class CategoryController {
 
 	}
 
-	@GetMapping(CategoryMappings.FIND_BY_NAME)
-	public CategoryModel findByName(@PathVariable String name) throws NotFoundException {
+	@GetMapping(BotMappings.FIND_BY_NAME)
+	public Bot findByName(@PathVariable String name) throws NotFoundException {
 
-		Optional<CategoryModel> opt = catRepo.findByCodename(name);
+		Optional<Bot> opt = catRepo.findAllByName(name);
 
 		if(!opt.isPresent())
 			throw new NotFoundException();

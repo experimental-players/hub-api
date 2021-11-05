@@ -1,6 +1,5 @@
 package org.experimentalplayers.hubapi.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -19,38 +18,33 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 @ToString
 @JsonInclude(Include.NON_NULL)
 @Entity
-@Table(name = "projects")
-public class ProjectModel {
+@Table(name = "bots")
+public class Bot {
 
 	@Id
-	@Column(name = "id_proj")
+	@Column(name = "id_bot")
 	private UUID id;
 
-	@Column(name = "codename")
-	private String codename;
-
-	@Column(name = "fullname")
-	private String fullname;
+	@Column(name = "name")
+	private String name;
 
 	@Column(name = "description")
 	private String description;
 
-	@Column(name = "url_logo")
-	private String urlLogo;
+	@Column(name = "page_content")
+	private String pageContent;
 
-	@Column(name = "url_bg")
-	private String urlBg;
+	@Column(name = "project_url")
+	private String projectUrl;
 
-	@Column(name = "url_github")
-	private String urlGit;
+	@Column(name = "logo_url")
+	private String logoUrl;
+
+	@Column(name = "banner_url")
+	private String bannerUrl;
 
 	@Column(name = "color")
 	private String color;
-
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_cat")
-	private CategoryModel category;
 
 	@Override
 	public boolean equals(Object o) {
@@ -58,7 +52,7 @@ public class ProjectModel {
 			return true;
 		if(o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
 			return false;
-		ProjectModel that = (ProjectModel) o;
+		Bot that = (Bot) o;
 
 		return Objects.equals(id, that.id);
 	}

@@ -1,19 +1,19 @@
 package org.experimentalplayers.hubapi.config;
 
 import lombok.Getter;
-import org.experimentalplayers.hubapi.models.CategoryModel;
-import org.experimentalplayers.hubapi.models.CategoryModel.CategoryModelBuilder;
-import org.experimentalplayers.hubapi.models.ProjectModel;
-import org.experimentalplayers.hubapi.models.ProjectModel.ProjectModelBuilder;
+import org.experimentalplayers.hubapi.models.Bot;
+import org.experimentalplayers.hubapi.models.Bot.CategoryModelBuilder;
+import org.experimentalplayers.hubapi.models.InputType;
+import org.experimentalplayers.hubapi.models.InputType.ProjectModelBuilder;
 
 import java.util.*;
 
 @Getter
 public class TestMockValues {
 
-	public static final CategoryModelBuilder BUILDER_MINECRAFT = CategoryModel.builder()
+	public static final CategoryModelBuilder BUILDER_MINECRAFT = Bot.builder()
 			.id(UUID.fromString("2805fc7e-c22f-413d-8d94-8c2929704712"))
-			.codename("minecraft")
+			.name("minecraft")
 			.fullname("Minecraft Plugins")
 			.description("# Some Minecraft Plugins description")
 			.urlBg(null)
@@ -21,7 +21,7 @@ public class TestMockValues {
 			.color(null)
 			.projects(new HashSet<>());
 
-	public static final CategoryModelBuilder BUILDER_DISCORD = CategoryModel.builder()
+	public static final CategoryModelBuilder BUILDER_DISCORD = Bot.builder()
 			.id(UUID.fromString("b210049b-b9a3-4f07-acdd-48c0aeae8f57"))
 			.codename("discord")
 			.fullname("Discord Bots")
@@ -31,7 +31,7 @@ public class TestMockValues {
 			.color(null)
 			.projects(new HashSet<>());
 
-	public static final ProjectModelBuilder BUILDER_UHC = ProjectModel.builder()
+	public static final ProjectModelBuilder BUILDER_UHC = InputType.builder()
 			.id(UUID.fromString("c892aeda-bd52-4fce-9209-06f536470342"))
 			.codename("xkuhc")
 			.fullname("xkUHC")
@@ -41,7 +41,7 @@ public class TestMockValues {
 			.color(null)
 			.category(null);
 
-	public static final ProjectModelBuilder BUILDER_DEATHSWAP = ProjectModel.builder()
+	public static final ProjectModelBuilder BUILDER_DEATHSWAP = InputType.builder()
 			.id(UUID.fromString("554af97c-19df-4072-963b-6c9bbd6d700b"))
 			.codename("xkds")
 			.fullname("xkDeathSwap")
@@ -51,7 +51,7 @@ public class TestMockValues {
 			.color(null)
 			.category(null);
 
-	public static final ProjectModelBuilder BUILDER_VGREETER = ProjectModel.builder()
+	public static final ProjectModelBuilder BUILDER_VGREETER = InputType.builder()
 			.id(UUID.fromString("81f100af-a95e-4e8d-946b-b1163807941b"))
 			.codename("vgreeter")
 			.fullname("VGreeter")
@@ -61,7 +61,7 @@ public class TestMockValues {
 			.color(null)
 			.category(null);
 
-	public static final ProjectModelBuilder BUILDER_MINCHIABBOT = ProjectModel.builder()
+	public static final ProjectModelBuilder BUILDER_MINCHIABBOT = InputType.builder()
 			.id(UUID.fromString("b94add28-6e45-4185-9ce4-42617cae25ff"))
 			.codename("minchiabbot")
 			.fullname("Minchiabbot")
@@ -73,15 +73,15 @@ public class TestMockValues {
 
 	public static TestMockValues create() {
 
-		HashMap<String, CategoryModel> mockCats = new HashMap<>();
-		HashMap<String, ProjectModel> mockProjs = new HashMap<>();
+		HashMap<String, Bot> mockCats = new HashMap<>();
+		HashMap<String, InputType> mockProjs = new HashMap<>();
 
-		CategoryModel minecraft = BUILDER_MINECRAFT.build();
-		CategoryModel discord = BUILDER_DISCORD.build();
-		ProjectModel uhc = BUILDER_UHC.build();
-		ProjectModel deathswap = BUILDER_DEATHSWAP.build();
-		ProjectModel vgreeter = BUILDER_VGREETER.build();
-		ProjectModel minchiabbot = BUILDER_MINCHIABBOT.build();
+		Bot minecraft = BUILDER_MINECRAFT.build();
+		Bot discord = BUILDER_DISCORD.build();
+		InputType uhc = BUILDER_UHC.build();
+		InputType deathswap = BUILDER_DEATHSWAP.build();
+		InputType vgreeter = BUILDER_VGREETER.build();
+		InputType minchiabbot = BUILDER_MINCHIABBOT.build();
 
 		bindCategory(minecraft, uhc, deathswap);
 		bindCategory(discord, vgreeter, minchiabbot);
@@ -97,10 +97,10 @@ public class TestMockValues {
 
 	}
 
-	public static void bindCategory(CategoryModel category, ProjectModel... projects) {
+	public static void bindCategory(Bot category, InputType... projects) {
 
-		Set<ProjectModel> set = category.getProjects();
-		for(ProjectModel project : projects) {
+		Set<InputType> set = category.getProjects();
+		for(InputType project : projects) {
 
 			project.setCategory(category);
 			set.add(project);
@@ -109,10 +109,10 @@ public class TestMockValues {
 
 	}
 
-	private final Map<String, CategoryModel> categories;
-	private final Map<String, ProjectModel> projects;
+	private final Map<String, Bot> categories;
+	private final Map<String, InputType> projects;
 
-	public TestMockValues(Map<String, CategoryModel> categories, Map<String, ProjectModel> projects) {
+	public TestMockValues(Map<String, Bot> categories, Map<String, InputType> projects) {
 
 		this.categories = Collections.unmodifiableMap(categories);
 		this.projects = Collections.unmodifiableMap(projects);
