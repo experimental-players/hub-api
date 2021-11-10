@@ -1,14 +1,23 @@
 package org.experimentalplayers.hubapi.controllers;
 
+import Utils.JBody;
+import Utils.PageUtil;
+import Utils.Status;
 import lombok.extern.slf4j.Slf4j;
-import org.experimentalplayers.hubapi.config.CategoryMappings;
 import org.experimentalplayers.hubapi.config.ProjectMappings;
+import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.Project;
+import org.experimentalplayers.hubapi.repositories.ProjectRepository;
+import org.experimentalplayers.hubapi.services.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
-import services.ProjectService;
 
+import java.util.List;
+import java.util.Optional;
 
 /**
  * <h2>Application sub-API</h2>
@@ -22,35 +31,40 @@ import services.ProjectService;
 @Slf4j
 @RestController
 @RequestMapping(ProjectMappings.ROOT)
-public class ProjectController {
+public class ProjectController{
 
-
-    private ProjectService projectService;
+	@Autowired
+	ProjectService projectService;
 
     @GetMapping(ProjectMappings.FIND_ALL)
-    public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") int page,
-                              @RequestParam(defaultValue = "10") int limit) {
+    public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
+								 @RequestParam(defaultValue = "10") Integer limit) {
 
         log.info("Begin findAll()...");
+;
+		Page<Project> projectPage = projectService.findAll(page,limit);
 
-        Page<Project> projects = projectService.findAll(page,limit);
+		log.info(projectPage.toString());
 
-        log.info("End findAll()...");
-        HttpEntity<?> httpEntity = new HttpEntity<>(projects);
-        return httpEntity;
-
-    }
-/*
-    @GetMapping(CategoryMappings.FIND_BY_NAME)
-    public Project findByName(@PathVariable String name) throws NotFoundException {
-
-        Optional<Project> opt = projRepo.findByCodename(name);
-
-        if(!opt.isPresent())
-            throw new NotFoundException();
-
-        return opt.get();
+		log.info("End findAll()...");
+		HttpEntity<?> httpEntity = new HttpEntity<>(projectPage);
+		return httpEntity;
 
     }
-*/
+
+    @GetMapping(ProjectMappings.FIND_BY_NAME)
+    public HttpEntity<?> findByName(@PathVariable String name) throws NotFoundException {
+
+		log.info("Begin findByName()...");
+
+		Optional<Project> project = projectService.findByName(name);
+		if(!project.isPresent())
+			return new HttpEntity<>(new JBody<>(Status.NOT_FOUND));
+
+		log.info("End findByName()...");
+		HttpEntity<?> httpEntity = new HttpEntity<>(project.get());
+		return httpEntity;
+
+    }
+
 }

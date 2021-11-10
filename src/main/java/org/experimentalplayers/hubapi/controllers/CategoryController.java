@@ -1,15 +1,22 @@
 package org.experimentalplayers.hubapi.controllers;
 
+import Utils.JBody;
+import Utils.PageUtil;
+import Utils.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.CategoryMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.Category;
 import org.experimentalplayers.hubapi.repositories.CategoryRepository;
-import org.experimentalplayers.hubapi.responses.CollectionResponse;
-import org.experimentalplayers.hubapi.responses.CollectionResponse.CollectionResponseBuilder;
+import org.experimentalplayers.hubapi.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -26,10 +33,10 @@ import java.util.Optional;
 @RequestMapping(CategoryMappings.ROOT)
 public class CategoryController {
 
-    @Autowired
-    private CategoryRepository catRepo;
+	@Autowired
+	CategoryService categoryService;
 
-    /**
+	/**
      * Find all applications.
      *
      * <br>
@@ -40,40 +47,33 @@ public class CategoryController {
      * @return An {@link Iterable} containing all the elements retrieved
      */
     @GetMapping(CategoryMappings.FIND_ALL)
-    public CollectionResponse findAll(@RequestParam(defaultValue = "1") int page,
-                                      @RequestParam(defaultValue = "10") int limit) {
+    public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
+									  @RequestParam(defaultValue = "10") Integer limit) {
 
         log.info("Begin findAll()...");
 
-        // TODO: PAGEABLE
+		Page<Category> categoryPage = categoryService.findAll(page,limit);
 
-        CollectionResponseBuilder responseBuilder = CollectionResponse
-                .builder()
-                .limit(limit)
-                .page(page);
-
-        for(Category category : catRepo.findAll())
-            responseBuilder.result(category);
-
-        System.out.println(responseBuilder.toString());
+        log.info(categoryPage.toString());
 
         log.info("End findAll()...");
-        return responseBuilder.build();
+		HttpEntity<?> httpEntity = new HttpEntity<>(categoryPage);
+		return httpEntity;
 
     }
 
     @GetMapping(CategoryMappings.FIND_BY_NAME)
-    public Category findByName(@PathVariable String name) throws NotFoundException {
+    public HttpEntity<?>  findByName(@PathVariable String name) throws NotFoundException {
 
         log.info("Begin findByName()...");
 
-        Optional<Category> opt = catRepo.findAllByCodename(name);
-
-        if(!opt.isPresent())
-            throw new NotFoundException();
+       Optional<Category> category = categoryService.findByName(name);
+		if(!category.isPresent())
+			return new HttpEntity<>(new JBody<>(Status.NOT_FOUND));
 
         log.info("End findByName()...");
-        return opt.get();
+		HttpEntity<?> httpEntity = new HttpEntity<>(category.get());
+		return httpEntity;
 
     }
 

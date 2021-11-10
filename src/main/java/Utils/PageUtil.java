@@ -40,6 +40,20 @@ public class PageUtil implements Pageable {
         this.offset = page;
     }
 
+	public PageUtil(int limit, int page, Sort sort) {
+		if (limit < 1) {
+			throw new IllegalArgumentException("Limit must not be less than one!");
+		}
+		if (page <= 0) {
+			page = 0;
+		} else {
+			page = limit * (page - 1);
+		}
+		this.limit = limit;
+		this.offset = page;
+		this.sort = sort;
+	}
+
     @Override
     public int getPageNumber() {
         return offset / limit;

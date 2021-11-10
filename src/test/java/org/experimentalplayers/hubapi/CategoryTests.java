@@ -29,6 +29,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -79,8 +80,8 @@ class CategoryTests {
 		Map<String, Category> mockCategories = mockValues.getCategories();
 		Map<String, Project> mockProjects = mockValues.getProjects();
 
-		when(catRepo.findAll()).thenReturn(mockCategories.values());
-		when(projRepo.findAll()).thenReturn(mockProjects.values());
+		when(catRepo.findAll()).thenReturn((List<Category>) mockCategories.values());
+		when(projRepo.findAll()).thenReturn((List<Project>) mockProjects.values());
 
 		when(catRepo.findAllByCodename(anyString())).thenAnswer(invocation -> Optional.of(mockCategories.get(invocation.getArgument(
 				0,
