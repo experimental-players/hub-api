@@ -10,6 +10,6 @@ import java.util.UUID;
 @Repository
 public interface InputTypeRepository extends PagingAndSortingRepository<InputType, UUID> {
 
-	Optional<InputType> findByCodename(String shortName);
+	Optional<InputType> findAllByDescription(String description);
 
 }

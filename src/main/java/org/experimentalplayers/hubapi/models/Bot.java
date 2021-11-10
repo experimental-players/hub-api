@@ -21,6 +21,9 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Table(name = "bots")
 public class Bot {
 
+	private static final long serialVersionUID = 1L;
+
+
 	@Id
 	@Column(name = "id_bot")
 	private UUID id;

@@ -14,7 +14,7 @@ public abstract class InputTypeMappings {
 	 *
 	 * @see InputTypeController
 	 */
-	public static final String ROOT = "/project";
+	public static final String ROOT = "/inputType";
 
 	public static final String FIND_ALL = "/findAll";
 

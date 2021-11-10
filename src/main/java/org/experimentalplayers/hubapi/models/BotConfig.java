@@ -3,10 +3,9 @@ package org.experimentalplayers.hubapi.models;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.postgresql.largeobject.LargeObject;
 
 import javax.persistence.*;
-import java.math.BigInteger;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -19,7 +18,11 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "bot_configs")
-public class BotConfig {
+@IdClass(BotConfig.class)
+public class BotConfig implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
 
     @Id
     @Column(name = "id_server")

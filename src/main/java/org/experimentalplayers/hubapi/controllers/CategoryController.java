@@ -43,6 +43,8 @@ public class CategoryController {
     public CollectionResponse findAll(@RequestParam(defaultValue = "1") int page,
                                       @RequestParam(defaultValue = "10") int limit) {
 
+        log.info("Begin findAll()...");
+
         // TODO: PAGEABLE
 
         CollectionResponseBuilder responseBuilder = CollectionResponse
@@ -55,6 +57,7 @@ public class CategoryController {
 
         System.out.println(responseBuilder.toString());
 
+        log.info("End findAll()...");
         return responseBuilder.build();
 
     }
@@ -62,11 +65,14 @@ public class CategoryController {
     @GetMapping(CategoryMappings.FIND_BY_NAME)
     public Category findByName(@PathVariable String name) throws NotFoundException {
 
-        Optional<Category> opt = catRepo.findByCodename(name);
+        log.info("Begin findByName()...");
+
+        Optional<Category> opt = catRepo.findAllByCodename(name);
 
         if(!opt.isPresent())
             throw new NotFoundException();
 
+        log.info("End findByName()...");
         return opt.get();
 
     }

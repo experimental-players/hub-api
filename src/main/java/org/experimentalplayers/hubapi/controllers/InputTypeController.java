@@ -28,19 +28,19 @@ import java.util.Optional;
 public class InputTypeController {
 
 	@Autowired
-	private InputTypeRepository projRepo;
+	private InputTypeRepository inputTypeRepository;
 
 	@GetMapping(InputTypeMappings.FIND_ALL)
 	public Iterable<InputType> findAll() {
 
-		return projRepo.findAll();
+		return inputTypeRepository.findAll();
 
 	}
 
 	@GetMapping(InputTypeMappings.FIND_BY_NAME)
 	public InputType findByName(@PathVariable String name) throws NotFoundException {
 
-		Optional<InputType> opt = projRepo.findByCodename(name);
+		Optional<InputType> opt = inputTypeRepository.findAllByDescription(name);
 
 		if(!opt.isPresent())
 			throw new NotFoundException();

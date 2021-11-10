@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -20,7 +18,11 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "bot_inputs")
-public class BotInput {
+@IdClass(BotInput.class)
+public class BotInput implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
 
     @Id
     @Column(name = "id_bot")

@@ -14,7 +14,7 @@ public abstract class BotMappings {
 	 *
 	 * @see BotController
 	 */
-	public static final String ROOT = "/category";
+	public static final String ROOT = "/bot";
 
 	public static final String FIND_ALL = "/findAll";
 

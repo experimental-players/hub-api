@@ -3,9 +3,13 @@ package org.experimentalplayers.hubapi;
 import org.experimentalplayers.hubapi.config.CommonDescriptors;
 import org.experimentalplayers.hubapi.config.TestMockValues;
 import org.experimentalplayers.hubapi.models.Bot;
+import org.experimentalplayers.hubapi.models.Category;
 import org.experimentalplayers.hubapi.models.InputType;
+import org.experimentalplayers.hubapi.models.Project;
 import org.experimentalplayers.hubapi.repositories.BotRepository;
+import org.experimentalplayers.hubapi.repositories.CategoryRepository;
 import org.experimentalplayers.hubapi.repositories.InputTypeRepository;
+import org.experimentalplayers.hubapi.repositories.ProjectRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -54,10 +58,10 @@ class CategoryTests {
 	// TODO: TEST PAGEABLE
 
 	@MockBean
-	private BotRepository catRepo;
+	private CategoryRepository catRepo;
 
 	@MockBean
-	private InputTypeRepository projRepo;
+	private ProjectRepository projRepo;
 
 	private MockMvc mockMvc;
 
@@ -72,13 +76,13 @@ class CategoryTests {
 				.build();
 
 		TestMockValues mockValues = TestMockValues.create();
-		Map<String, Bot> mockCategories = mockValues.getCategories();
-		Map<String, InputType> mockProjects = mockValues.getProjects();
+		Map<String, Category> mockCategories = mockValues.getCategories();
+		Map<String, Project> mockProjects = mockValues.getProjects();
 
 		when(catRepo.findAll()).thenReturn(mockCategories.values());
 		when(projRepo.findAll()).thenReturn(mockProjects.values());
 
-		when(catRepo.findAllByName(anyString())).thenAnswer(invocation -> Optional.of(mockCategories.get(invocation.getArgument(
+		when(catRepo.findAllByCodename(anyString())).thenAnswer(invocation -> Optional.of(mockCategories.get(invocation.getArgument(
 				0,
 				String.class))));
 

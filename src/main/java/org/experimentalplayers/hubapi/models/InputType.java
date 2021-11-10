@@ -21,6 +21,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Table(name = "input_types")
 public class InputType {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "id_type")
 	private UUID id;

@@ -3,16 +3,12 @@ package org.experimentalplayers.hubapi.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.CategoryMappings;
 import org.experimentalplayers.hubapi.config.ProjectMappings;
-import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.Project;
-import org.experimentalplayers.hubapi.repositories.ProjectRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpEntity;
+import org.springframework.web.bind.annotation.*;
+import services.ProjectService;
 
-import java.util.Optional;
 
 /**
  * <h2>Application sub-API</h2>
@@ -28,16 +24,23 @@ import java.util.Optional;
 @RequestMapping(ProjectMappings.ROOT)
 public class ProjectController {
 
-    @Autowired
-    private ProjectRepository projRepo;
 
-    @GetMapping(CategoryMappings.FIND_ALL)
-    public Iterable<Project> findAll() {
+    private ProjectService projectService;
 
-        return projRepo.findAll();
+    @GetMapping(ProjectMappings.FIND_ALL)
+    public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") int page,
+                              @RequestParam(defaultValue = "10") int limit) {
+
+        log.info("Begin findAll()...");
+
+        Page<Project> projects = projectService.findAll(page,limit);
+
+        log.info("End findAll()...");
+        HttpEntity<?> httpEntity = new HttpEntity<>(projects);
+        return httpEntity;
 
     }
-
+/*
     @GetMapping(CategoryMappings.FIND_BY_NAME)
     public Project findByName(@PathVariable String name) throws NotFoundException {
 
@@ -49,5 +52,5 @@ public class ProjectController {
         return opt.get();
 
     }
-
+*/
 }
