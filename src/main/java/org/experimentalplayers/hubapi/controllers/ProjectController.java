@@ -1,22 +1,17 @@
 package org.experimentalplayers.hubapi.controllers;
 
-import Utils.JBody;
-import Utils.PageUtil;
 import Utils.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.ProjectMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.Project;
-import org.experimentalplayers.hubapi.repositories.ProjectRepository;
 import org.experimentalplayers.hubapi.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -52,17 +47,17 @@ public class ProjectController{
 
     }
 
-    @GetMapping(ProjectMappings.FIND_BY_NAME)
+	@GetMapping(ProjectMappings.FIND_BY_NAME)
     public HttpEntity<?> findByName(@PathVariable String name) throws NotFoundException {
 
 		log.info("Begin findByName()...");
 
-		Optional<Project> project = projectService.findByName(name);
-		if(!project.isPresent())
-			return new HttpEntity<>(new JBody<>(Status.NOT_FOUND));
-
+		Project project = projectService.findByName(name);
+		/*if(!project.isPresent())
+			return new HttpEntity<>(Status.NOT_FOUND);
+*/
 		log.info("End findByName()...");
-		HttpEntity<?> httpEntity = new HttpEntity<>(project.get());
+		HttpEntity<?> httpEntity = new HttpEntity<>(project);
 		return httpEntity;
 
     }

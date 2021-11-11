@@ -27,7 +27,7 @@ public class ProjectServiceImpl implements ProjectService {
 		log.info("Begin findAll()... ProjectServiceImpl");
 
 
-		Pageable pageable = new PageUtil(page,limit);
+		Pageable pageable = new PageUtil(limit,page);
 
         List<Project> projects = projRepo.findAll();
 		Page<Project> pageProject = new PageImpl<Project>(projects, pageable, projects.size());
@@ -37,7 +37,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Optional<Project> findByName(String name) {
+    public Project findByName(String name) {
 
 		log.info("Begin findByName(name)... ProjectServiceImpl");
 
@@ -46,7 +46,7 @@ public class ProjectServiceImpl implements ProjectService {
 			throw new NotFoundException();
 
 		log.info("End findByName(name)... ProjectServiceImpl");
-		return optProj;
+		return optProj.get();
     }
 
 }

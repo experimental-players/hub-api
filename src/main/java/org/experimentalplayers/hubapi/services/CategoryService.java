@@ -9,6 +9,6 @@ public interface CategoryService {
 
     public Page<Category> findAll(Integer page,Integer limit);
 
-    public Optional<Category> findByName(String name);
+    public Category findByName(String name);
 
 }

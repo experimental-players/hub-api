@@ -1,22 +1,17 @@
 package org.experimentalplayers.hubapi.controllers;
 
-import Utils.JBody;
-import Utils.PageUtil;
 import Utils.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.CategoryMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.Category;
-import org.experimentalplayers.hubapi.repositories.CategoryRepository;
 import org.experimentalplayers.hubapi.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -29,7 +24,7 @@ import java.util.Optional;
  * </p>
  */
 @Slf4j
-@RestController
+@RestController()
 @RequestMapping(CategoryMappings.ROOT)
 public class CategoryController {
 
@@ -46,9 +41,10 @@ public class CategoryController {
      * @param limit Not implemented yet, the max elements to retrieve in a call
      * @return An {@link Iterable} containing all the elements retrieved
      */
+
     @GetMapping(CategoryMappings.FIND_ALL)
     public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
-									  @RequestParam(defaultValue = "10") Integer limit) {
+                                               @RequestParam(defaultValue = "10") Integer limit) {
 
         log.info("Begin findAll()...");
 
@@ -62,17 +58,16 @@ public class CategoryController {
 
     }
 
+
     @GetMapping(CategoryMappings.FIND_BY_NAME)
-    public HttpEntity<?>  findByName(@PathVariable String name) throws NotFoundException {
+    public HttpEntity<?> findByName(@PathVariable String name) throws NotFoundException {
 
         log.info("Begin findByName()...");
 
-       Optional<Category> category = categoryService.findByName(name);
-		if(!category.isPresent())
-			return new HttpEntity<>(new JBody<>(Status.NOT_FOUND));
+       Category category = categoryService.findByName(name);
 
         log.info("End findByName()...");
-		HttpEntity<?> httpEntity = new HttpEntity<>(category.get());
+		HttpEntity<?> httpEntity = new HttpEntity<>(category);
 		return httpEntity;
 
     }

@@ -9,6 +9,6 @@ public interface ProjectService {
 
 	Page<Project> findAll(Integer page, Integer limit);
 
-	Optional<Project> findByName(String name);
+	Project findByName(String name);
 
 }

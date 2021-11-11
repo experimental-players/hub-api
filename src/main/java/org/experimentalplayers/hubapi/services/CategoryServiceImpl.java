@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Page<Category> findAll(Integer page, Integer limit) {
 
-		Pageable pageable = new PageUtil(page,limit);
+		Pageable pageable = new PageUtil(limit,page);
 
 		List<Category> categories = catRepo.findAll();
 		Page<Category> categoryPage = new PageImpl<Category>(categories, pageable, categories.size());
@@ -34,14 +34,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<Category> findByName(String name) {
+    public Category findByName(String name) {
 
     	log.info("Begin findByName(name)... ProjectServiceImpl");
 
 		Optional<Category> optCat = catRepo.findAllByCodename(name);
+        if(!optCat.isPresent())
+            throw new NotFoundException();
 
 		log.info("End findByName(name)... ProjectServiceImpl");
-		return optCat;
+		return optCat.get();
     }
 
 }
