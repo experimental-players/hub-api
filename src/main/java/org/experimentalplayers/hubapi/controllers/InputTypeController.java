@@ -2,16 +2,14 @@ package org.experimentalplayers.hubapi.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.InputTypeMappings;
+import org.experimentalplayers.hubapi.config.ProjectMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.InputType;
-import org.experimentalplayers.hubapi.repositories.InputTypeRepository;
+import org.experimentalplayers.hubapi.services.InputTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <h2>Application sub-API</h2>
@@ -28,24 +26,34 @@ import java.util.Optional;
 public class InputTypeController {
 
 	@Autowired
-	private InputTypeRepository inputTypeRepository;
+	InputTypeService inputTypeService;
 
 	@GetMapping(InputTypeMappings.FIND_ALL)
-	public Iterable<InputType> findAll() {
+	public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
+								 @RequestParam(defaultValue = "10") Integer limit) {
 
-		return inputTypeRepository.findAll();
+		log.info("Begin findAll()...");
+
+		Page<InputType> inputTypePage = inputTypeService.findAll(page,limit);
+
+		log.info(inputTypePage.toString());
+
+		log.info("End findAll()...");
+		HttpEntity<?> httpEntity = new HttpEntity<>(inputTypePage);
+		return httpEntity;
 
 	}
 
-	@GetMapping(InputTypeMappings.FIND_BY_NAME)
-	public InputType findByName(@PathVariable String name) throws NotFoundException {
+	@GetMapping(InputTypeMappings.FIND_BY_DESCRIPTION)
+	public HttpEntity<?> findByName(@PathVariable String description) throws NotFoundException {
 
-		Optional<InputType> opt = inputTypeRepository.findAllByDescription(name);
+		log.info("Begin findByName()...");
 
-		if(!opt.isPresent())
-			throw new NotFoundException();
+		InputType inputType = inputTypeService.findByDescription(description);
 
-		return opt.get();
+		log.info("End findByName()...");
+		HttpEntity<?> httpEntity = new HttpEntity<>(inputType);
+		return httpEntity;
 
 	}
 

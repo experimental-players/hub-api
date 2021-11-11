@@ -1,6 +1,6 @@
 package org.experimentalplayers.hubapi.controllers;
 
-import Utils.Status;
+
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.ProjectMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
@@ -9,10 +9,9 @@ import org.experimentalplayers.hubapi.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+
 
 /**
  * <h2>Application sub-API</h2>
@@ -53,9 +52,7 @@ public class ProjectController{
 		log.info("Begin findByName()...");
 
 		Project project = projectService.findByName(name);
-		/*if(!project.isPresent())
-			return new HttpEntity<>(Status.NOT_FOUND);
-*/
+
 		log.info("End findByName()...");
 		HttpEntity<?> httpEntity = new HttpEntity<>(project);
 		return httpEntity;

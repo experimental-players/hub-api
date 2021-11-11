@@ -1,6 +1,5 @@
 package org.experimentalplayers.hubapi.controllers;
 
-import Utils.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.CategoryMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
@@ -9,10 +8,8 @@ import org.experimentalplayers.hubapi.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 /**
  * <h2>Application sub-API</h2>

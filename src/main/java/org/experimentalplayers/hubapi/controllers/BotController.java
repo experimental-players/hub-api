@@ -4,14 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.BotMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.Bot;
-import org.experimentalplayers.hubapi.repositories.BotRepository;
-import org.experimentalplayers.hubapi.responses.CollectionResponse;
-import org.experimentalplayers.hubapi.responses.CollectionResponse.CollectionResponseBuilder;
+import org.experimentalplayers.hubapi.models.Project;
+import org.experimentalplayers.hubapi.services.BotService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 /**
  * <h2>Application sub-API</h2>
@@ -28,47 +26,34 @@ import java.util.Optional;
 public class BotController {
 
 	@Autowired
-	private BotRepository catRepo;
+	BotService botService;
 
-	/**
-	 * Find all applications.
-	 *
-	 * <br>
-	 * This endpoint only accepts GET requests, a 405 MethodNotAllowed response will be sent for other HTTP methods.
-	 *
-	 * @param page  Not implemented yet, the page number if there are more elements than limit
-	 * @param limit Not implemented yet, the max elements to retrieve in a call
-	 * @return An {@link Iterable} containing all the elements retrieved
-	 */
 	@GetMapping(BotMappings.FIND_ALL)
-	public CollectionResponse findAll(@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "10") int limit) {
+	public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
+								 @RequestParam(defaultValue = "10") Integer limit) {
 
-		PageRequest request = PageRequest.of(page, limit);
+		log.info("Begin findAll()...");
+		;
+		Page<Bot> botPage = botService.findAll(page,limit);
 
-		CollectionResponseBuilder responseBuilder = CollectionResponse
-				.builder()
-				.limit(limit)
-				.page(page);
+		log.info(botPage.toString());
 
-		for(Bot category : catRepo.findAll(request))
-			responseBuilder.result(category);
-
-		System.out.println(responseBuilder.toString());
-
-		return responseBuilder.build();
+		log.info("End findAll()...");
+		HttpEntity<?> httpEntity = new HttpEntity<>(botPage);
+		return httpEntity;
 
 	}
 
 	@GetMapping(BotMappings.FIND_BY_NAME)
-	public Bot findByName(@PathVariable String name) throws NotFoundException {
+	public HttpEntity<?> findByName(@PathVariable String name) throws NotFoundException {
 
-		Optional<Bot> opt = catRepo.findAllByName(name);
+		log.info("Begin findByName()...");
 
-		if(!opt.isPresent())
-			throw new NotFoundException();
+		Bot bot = botService.findByName(name);
 
-		return opt.get();
+		log.info("End findByName()...");
+		HttpEntity<?> httpEntity = new HttpEntity<>(bot);
+		return httpEntity;
 
 	}
 

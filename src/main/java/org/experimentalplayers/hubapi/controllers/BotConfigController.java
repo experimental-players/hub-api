@@ -1,17 +1,53 @@
 package org.experimentalplayers.hubapi.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.experimentalplayers.hubapi.repositories.BotConfigRepository;
+import org.experimentalplayers.hubapi.config.BotConfigMappings;
+import org.experimentalplayers.hubapi.config.ProjectMappings;
+import org.experimentalplayers.hubapi.exceptions.NotFoundException;
+import org.experimentalplayers.hubapi.models.BotConfig;
+import org.experimentalplayers.hubapi.services.BotConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpEntity;
+import org.springframework.web.bind.annotation.*;
+
+
 
 @Slf4j
 @RestController
-@RequestMapping()
+@RequestMapping(BotConfigMappings.ROOT)
 public class BotConfigController {
 
     @Autowired
-    private BotConfigRepository botConfigRepo;
+    BotConfigService botConfigService;
+
+    @GetMapping(BotConfigMappings.FIND_ALL)
+    public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
+                                 @RequestParam(defaultValue = "10") Integer limit) {
+
+        log.info("Begin findAll()...");
+        ;
+        Page<BotConfig> botConfigPage = botConfigService.findAll(page,limit);
+
+        log.info(botConfigPage.toString());
+
+        log.info("End findAll()...");
+        HttpEntity<?> httpEntity = new HttpEntity<>(botConfigPage);
+        return httpEntity;
+
+    }
+
+    @GetMapping(BotConfigMappings.FIND_BY_IDSERVER)
+    public HttpEntity<?> findByName(@PathVariable Long idServer) throws NotFoundException {
+
+        log.info("Begin findByName()...");
+
+        BotConfig botConfig = botConfigService.findByIdServer(idServer);
+
+        log.info("End findByName()...");
+        HttpEntity<?> httpEntity = new HttpEntity<>(botConfig);
+        return httpEntity;
+
+    }
 
 }

@@ -18,6 +18,6 @@ public abstract class InputTypeMappings {
 
 	public static final String FIND_ALL = "/findAll";
 
-	public static final String FIND_BY_NAME = "/find/{name}";
+	public static final String FIND_BY_DESCRIPTION = "/find/{description}";
 
 }
