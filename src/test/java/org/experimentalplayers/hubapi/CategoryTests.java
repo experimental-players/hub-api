@@ -11,6 +11,7 @@ import org.experimentalplayers.hubapi.repositories.CategoryRepository;
 import org.experimentalplayers.hubapi.repositories.InputTypeRepository;
 import org.experimentalplayers.hubapi.repositories.ProjectRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -54,6 +55,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 		DataSourceTransactionManagerAutoConfiguration.class,
 		HibernateJpaAutoConfiguration.class
 })
+@Disabled("Disabled tests until rework")
 class CategoryTests {
 
 	// TODO: TEST PAGEABLE
