@@ -28,7 +28,7 @@ public class BotServiceImpl implements BotService{
 
         List<Bot> bots = botRepo.findAll();
 
-		return new PageImpl<Bot>(bots, pageable, bots.size());
+		return new PageImpl<>(bots, pageable, bots.size());
     }
 
     @Override

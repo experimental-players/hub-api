@@ -15,33 +15,34 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(BotInputMappings.ROOT)
 public class BotInputController {
 
-    @Autowired
-    BotInputService botInputService;
+	@Autowired
+	BotInputService botInputService;
 
-    @GetMapping(BotInputMappings.FIND_ALL)
-    public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
-                                 @RequestParam(defaultValue = "10") Integer limit) {
+	@GetMapping(BotInputMappings.FIND_ALL)
+	public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
+			@RequestParam(defaultValue = "10") Integer limit) {
 
-        log.info("Begin findAll()...");
-        ;
-        Page<BotInput> botInputPage = botInputService.findAll(page,limit);
+		log.info("Begin findAll()...");
 
-        log.info(botInputPage.toString());
+		Page<BotInput> botInputPage = botInputService.findAll(page, limit);
 
-        log.info("End findAll()...");
+		log.info(botInputPage.toString());
+
+		log.info("End findAll()...");
 		return new HttpEntity<>(botInputPage);
 
-    }
+	}
 
-    @GetMapping(BotInputMappings.FIND_BY_NAME)
-    public HttpEntity<?> findByName(@PathVariable String name) throws NotFoundException {
+	@GetMapping(BotInputMappings.FIND_BY_NAME)
+	public HttpEntity<?> findByName(@PathVariable String name) throws NotFoundException {
 
-        log.info("Begin findByName()...");
+		log.info("Begin findByName()...");
 
-        BotInput botInput = botInputService.findByName(name);
+		BotInput botInput = botInputService.findByName(name);
 
-        log.info("End findByName()...");
+		log.info("End findByName()...");
 		return new HttpEntity<>(botInput);
 
-    }
+	}
+
 }

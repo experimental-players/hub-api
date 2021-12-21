@@ -1,6 +1,5 @@
 package org.experimentalplayers.hubapi.controllers;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.ProjectMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
@@ -10,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 
 /**
  * <h2>Application sub-API</h2>
@@ -25,28 +22,28 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping(ProjectMappings.ROOT)
-public class ProjectController{
+public class ProjectController {
 
 	@Autowired
 	ProjectService projectService;
 
-    @GetMapping(ProjectMappings.FIND_ALL)
-    public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
-								 @RequestParam(defaultValue = "10") Integer limit) {
+	@GetMapping(ProjectMappings.FIND_ALL)
+	public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
+			@RequestParam(defaultValue = "10") Integer limit) {
 
-        log.info("Begin findAll()...");
-;
-		Page<Project> projectPage = projectService.findAll(page,limit);
+		log.info("Begin findAll()...");
+
+		Page<Project> projectPage = projectService.findAll(page, limit);
 
 		log.info(projectPage.toString());
 
 		log.info("End findAll()...");
 		return new HttpEntity<>(projectPage);
 
-    }
+	}
 
 	@GetMapping(ProjectMappings.FIND_BY_NAME)
-    public HttpEntity<?> findByName(@PathVariable String name) throws NotFoundException {
+	public HttpEntity<?> findByName(@PathVariable String name) throws NotFoundException {
 
 		log.info("Begin findByName()...");
 
@@ -55,6 +52,6 @@ public class ProjectController{
 		log.info("End findByName()...");
 		return new HttpEntity<>(project);
 
-    }
+	}
 
 }

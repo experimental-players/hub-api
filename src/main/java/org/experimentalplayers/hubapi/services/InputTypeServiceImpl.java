@@ -28,7 +28,7 @@ public class InputTypeServiceImpl implements InputTypeService{
 
         List<InputType> inputTypes = inputTypeRepo.findAll();
 
-		return new PageImpl<InputType>(inputTypes, pageable, inputTypes.size());
+		return new PageImpl<>(inputTypes, pageable, inputTypes.size());
     }
 
     @Override

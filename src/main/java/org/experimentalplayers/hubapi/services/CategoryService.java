@@ -5,8 +5,8 @@ import org.springframework.data.domain.Page;
 
 public interface CategoryService {
 
-    public Page<Category> findAll(Integer page,Integer limit);
+	Page<Category> findAll(Integer page, Integer limit);
 
-    public Category findByName(String name);
+	Category findByName(String name);
 
 }

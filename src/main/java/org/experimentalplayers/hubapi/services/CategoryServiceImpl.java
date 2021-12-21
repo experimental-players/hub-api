@@ -29,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 		List<Category> categories = catRepo.findAll();
 
-		return new PageImpl<Category>(categories, pageable, categories.size());
+		return new PageImpl<>(categories, pageable, categories.size());
     }
 
     @Override

@@ -28,7 +28,7 @@ public class BotInputServiceImpl implements BotInputService{
 
         List<BotInput> botInputs = botInputRepo.findAll();
 
-		return new PageImpl<BotInput>(botInputs, pageable, botInputs.size());
+		return new PageImpl<>(botInputs, pageable, botInputs.size());
     }
 
     @Override

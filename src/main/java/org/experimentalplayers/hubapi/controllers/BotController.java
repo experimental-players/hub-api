@@ -29,11 +29,11 @@ public class BotController {
 
 	@GetMapping(BotMappings.FIND_ALL)
 	public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
-								 @RequestParam(defaultValue = "10") Integer limit) {
+			@RequestParam(defaultValue = "10") Integer limit) {
 
 		log.info("Begin findAll()...");
-		;
-		Page<Bot> botPage = botService.findAll(page,limit);
+
+		Page<Bot> botPage = botService.findAll(page, limit);
 
 		log.info(botPage.toString());
 

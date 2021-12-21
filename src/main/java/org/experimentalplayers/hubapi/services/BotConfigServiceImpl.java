@@ -28,7 +28,7 @@ public class BotConfigServiceImpl implements BotConfigService{
 
         List<BotConfig> botConfigs = botConfigRepo.findAll();
 
-		return new PageImpl<BotConfig>(botConfigs, pageable, botConfigs.size());
+		return new PageImpl<>(botConfigs, pageable, botConfigs.size());
     }
 
     @Override

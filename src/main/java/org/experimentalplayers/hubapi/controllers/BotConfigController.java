@@ -15,34 +15,34 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(BotConfigMappings.ROOT)
 public class BotConfigController {
 
-    @Autowired
-    BotConfigService botConfigService;
+	@Autowired
+	BotConfigService botConfigService;
 
-    @GetMapping(BotConfigMappings.FIND_ALL)
-    public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
-                                 @RequestParam(defaultValue = "10") Integer limit) {
+	@GetMapping(BotConfigMappings.FIND_ALL)
+	public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
+			@RequestParam(defaultValue = "10") Integer limit) {
 
-        log.info("Begin findAll()...");
-        ;
-        Page<BotConfig> botConfigPage = botConfigService.findAll(page,limit);
+		log.info("Begin findAll()...");
 
-        log.info(botConfigPage.toString());
+		Page<BotConfig> botConfigPage = botConfigService.findAll(page, limit);
 
-        log.info("End findAll()...");
+		log.info(botConfigPage.toString());
+
+		log.info("End findAll()...");
 		return new HttpEntity<>(botConfigPage);
 
-    }
+	}
 
-    @GetMapping(BotConfigMappings.FIND_BY_IDSERVER)
-    public HttpEntity<?> findByName(@PathVariable Long idServer) throws NotFoundException {
+	@GetMapping(BotConfigMappings.FIND_BY_IDSERVER)
+	public HttpEntity<?> findByName(@PathVariable Long idServer) throws NotFoundException {
 
-        log.info("Begin findByName()...");
+		log.info("Begin findByName()...");
 
-        BotConfig botConfig = botConfigService.findByIdServer(idServer);
+		BotConfig botConfig = botConfigService.findByIdServer(idServer);
 
-        log.info("End findByName()...");
+		log.info("End findByName()...");
 		return new HttpEntity<>(botConfig);
 
-    }
+	}
 
 }
