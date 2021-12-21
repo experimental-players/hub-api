@@ -88,6 +88,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Annotations -->
+		<dependency>
+			<groupId>org.jetbrains</groupId>
+			<artifactId>annotations</artifactId>
+			<version>22.0.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
