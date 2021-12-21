@@ -1,7 +1,6 @@
 package org.experimentalplayers.hubapi.services;
 
 import org.experimentalplayers.hubapi.models.Bot;
-import org.experimentalplayers.hubapi.models.BotConfig;
 import org.springframework.data.domain.Page;
 
 public interface BotService {

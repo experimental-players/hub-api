@@ -4,7 +4,6 @@ import Utils.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.BotConfig;
-import org.experimentalplayers.hubapi.models.InputType;
 import org.experimentalplayers.hubapi.repositories.BotConfigRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,9 +27,8 @@ public class BotConfigServiceImpl implements BotConfigService{
         Pageable pageable = new PageUtil(limit,page);
 
         List<BotConfig> botConfigs = botConfigRepo.findAll();
-        Page<BotConfig> botConfigPage = new PageImpl<BotConfig>(botConfigs, pageable, botConfigs.size());
 
-        return botConfigPage;
+		return new PageImpl<BotConfig>(botConfigs, pageable, botConfigs.size());
     }
 
     @Override

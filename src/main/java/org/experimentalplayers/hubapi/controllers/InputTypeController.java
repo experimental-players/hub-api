@@ -2,7 +2,6 @@ package org.experimentalplayers.hubapi.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.InputTypeMappings;
-import org.experimentalplayers.hubapi.config.ProjectMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.InputType;
 import org.experimentalplayers.hubapi.services.InputTypeService;
@@ -39,8 +38,7 @@ public class InputTypeController {
 		log.info(inputTypePage.toString());
 
 		log.info("End findAll()...");
-		HttpEntity<?> httpEntity = new HttpEntity<>(inputTypePage);
-		return httpEntity;
+		return new HttpEntity<>(inputTypePage);
 
 	}
 
@@ -52,8 +50,7 @@ public class InputTypeController {
 		InputType inputType = inputTypeService.findByDescription(description);
 
 		log.info("End findByName()...");
-		HttpEntity<?> httpEntity = new HttpEntity<>(inputType);
-		return httpEntity;
+		return new HttpEntity<>(inputType);
 
 	}
 

@@ -2,10 +2,8 @@ package org.experimentalplayers.hubapi.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.BotInputMappings;
-import org.experimentalplayers.hubapi.config.ProjectMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.BotInput;
-import org.experimentalplayers.hubapi.models.Project;
 import org.experimentalplayers.hubapi.services.BotInputService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,8 +29,7 @@ public class BotInputController {
         log.info(botInputPage.toString());
 
         log.info("End findAll()...");
-        HttpEntity<?> httpEntity = new HttpEntity<>(botInputPage);
-        return httpEntity;
+		return new HttpEntity<>(botInputPage);
 
     }
 
@@ -44,8 +41,7 @@ public class BotInputController {
         BotInput botInput = botInputService.findByName(name);
 
         log.info("End findByName()...");
-        HttpEntity<?> httpEntity = new HttpEntity<>(botInput);
-        return httpEntity;
+		return new HttpEntity<>(botInput);
 
     }
 }

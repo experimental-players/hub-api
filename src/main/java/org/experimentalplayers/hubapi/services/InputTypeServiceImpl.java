@@ -3,7 +3,6 @@ package org.experimentalplayers.hubapi.services;
 import Utils.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
-import org.experimentalplayers.hubapi.models.Bot;
 import org.experimentalplayers.hubapi.models.InputType;
 import org.experimentalplayers.hubapi.repositories.InputTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,8 @@ public class InputTypeServiceImpl implements InputTypeService{
         Pageable pageable = new PageUtil(limit,page);
 
         List<InputType> inputTypes = inputTypeRepo.findAll();
-        Page<InputType> inputTypePage = new PageImpl<InputType>(inputTypes, pageable, inputTypes.size());
 
-        return inputTypePage;
+		return new PageImpl<InputType>(inputTypes, pageable, inputTypes.size());
     }
 
     @Override

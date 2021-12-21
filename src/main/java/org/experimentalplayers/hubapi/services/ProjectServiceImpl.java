@@ -30,7 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
 		Pageable pageable = new PageUtil(limit,page);
 
         List<Project> projects = projRepo.findAll();
-		Page<Project> pageProject = new PageImpl<Project>(projects, pageable, projects.size());
+		Page<Project> pageProject = new PageImpl<>(projects, pageable, projects.size());
 
 		log.info("End findAll()... ProjectServiceImpl");
 		return pageProject;

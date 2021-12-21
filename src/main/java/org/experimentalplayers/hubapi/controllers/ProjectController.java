@@ -41,8 +41,7 @@ public class ProjectController{
 		log.info(projectPage.toString());
 
 		log.info("End findAll()...");
-		HttpEntity<?> httpEntity = new HttpEntity<>(projectPage);
-		return httpEntity;
+		return new HttpEntity<>(projectPage);
 
     }
 
@@ -54,8 +53,7 @@ public class ProjectController{
 		Project project = projectService.findByName(name);
 
 		log.info("End findByName()...");
-		HttpEntity<?> httpEntity = new HttpEntity<>(project);
-		return httpEntity;
+		return new HttpEntity<>(project);
 
     }
 

@@ -4,7 +4,6 @@ import Utils.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.BotInput;
-import org.experimentalplayers.hubapi.models.InputType;
 import org.experimentalplayers.hubapi.repositories.BotInputRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,9 +27,8 @@ public class BotInputServiceImpl implements BotInputService{
         Pageable pageable = new PageUtil(limit,page);
 
         List<BotInput> botInputs = botInputRepo.findAll();
-        Page<BotInput> botInputPage = new PageImpl<BotInput>(botInputs, pageable, botInputs.size());
 
-        return botInputPage;
+		return new PageImpl<BotInput>(botInputs, pageable, botInputs.size());
     }
 
     @Override

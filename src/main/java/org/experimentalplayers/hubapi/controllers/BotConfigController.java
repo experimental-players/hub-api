@@ -2,7 +2,6 @@ package org.experimentalplayers.hubapi.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.BotConfigMappings;
-import org.experimentalplayers.hubapi.config.ProjectMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.BotConfig;
 import org.experimentalplayers.hubapi.services.BotConfigService;
@@ -10,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 
 @Slf4j
 @RestController
@@ -32,8 +29,7 @@ public class BotConfigController {
         log.info(botConfigPage.toString());
 
         log.info("End findAll()...");
-        HttpEntity<?> httpEntity = new HttpEntity<>(botConfigPage);
-        return httpEntity;
+		return new HttpEntity<>(botConfigPage);
 
     }
 
@@ -45,8 +41,7 @@ public class BotConfigController {
         BotConfig botConfig = botConfigService.findByIdServer(idServer);
 
         log.info("End findByName()...");
-        HttpEntity<?> httpEntity = new HttpEntity<>(botConfig);
-        return httpEntity;
+		return new HttpEntity<>(botConfig);
 
     }
 

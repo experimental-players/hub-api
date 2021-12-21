@@ -50,8 +50,7 @@ public class CategoryController {
         log.info(categoryPage.toString());
 
         log.info("End findAll()...");
-		HttpEntity<?> httpEntity = new HttpEntity<>(categoryPage);
-		return httpEntity;
+		return new HttpEntity<>(categoryPage);
 
     }
 
@@ -64,8 +63,7 @@ public class CategoryController {
        Category category = categoryService.findByName(name);
 
         log.info("End findByName()...");
-		HttpEntity<?> httpEntity = new HttpEntity<>(category);
-		return httpEntity;
+		return new HttpEntity<>(category);
 
     }
 

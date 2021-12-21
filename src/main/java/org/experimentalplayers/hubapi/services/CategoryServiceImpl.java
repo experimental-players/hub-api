@@ -28,9 +28,8 @@ public class CategoryServiceImpl implements CategoryService {
 		Pageable pageable = new PageUtil(limit,page);
 
 		List<Category> categories = catRepo.findAll();
-		Page<Category> categoryPage = new PageImpl<Category>(categories, pageable, categories.size());
 
-        return categoryPage;
+		return new PageImpl<Category>(categories, pageable, categories.size());
     }
 
     @Override

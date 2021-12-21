@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.experimentalplayers.hubapi.config.BotMappings;
 import org.experimentalplayers.hubapi.exceptions.NotFoundException;
 import org.experimentalplayers.hubapi.models.Bot;
-import org.experimentalplayers.hubapi.models.Project;
 import org.experimentalplayers.hubapi.services.BotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,8 +38,7 @@ public class BotController {
 		log.info(botPage.toString());
 
 		log.info("End findAll()...");
-		HttpEntity<?> httpEntity = new HttpEntity<>(botPage);
-		return httpEntity;
+		return new HttpEntity<>(botPage);
 
 	}
 
@@ -52,8 +50,7 @@ public class BotController {
 		Bot bot = botService.findByName(name);
 
 		log.info("End findByName()...");
-		HttpEntity<?> httpEntity = new HttpEntity<>(bot);
-		return httpEntity;
+		return new HttpEntity<>(bot);
 
 	}
 
