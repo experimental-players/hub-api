@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping(ProjectMappings.ROOT)
-public class ProjectController {
+public class ProjectController extends BaseController{
 
 	@Autowired
 	ProjectService projectService;

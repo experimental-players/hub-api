@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-public class IndexController {
+public class IndexController extends BaseController {
 
 	private final InfoBean info;
 

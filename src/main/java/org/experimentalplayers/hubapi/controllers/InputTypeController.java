@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping(InputTypeMappings.ROOT)
-public class InputTypeController {
+public class InputTypeController extends BaseController{
 
 	@Autowired
 	InputTypeService inputTypeService;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping(BotInputMappings.ROOT)
-public class BotInputController {
+public class BotInputController extends BaseController{
 
 	@Autowired
 	BotInputService botInputService;

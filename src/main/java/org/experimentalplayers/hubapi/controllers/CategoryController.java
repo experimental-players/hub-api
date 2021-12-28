@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController()
 @RequestMapping(CategoryMappings.ROOT)
-public class CategoryController {
+public class CategoryController extends BaseController{
 
 	@Autowired
 	CategoryService categoryService;
