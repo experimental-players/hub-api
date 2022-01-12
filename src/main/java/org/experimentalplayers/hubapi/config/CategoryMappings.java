@@ -21,4 +21,6 @@ public abstract class CategoryMappings {
 
     public static final String FIND_BY_NAME = "/find/{name}";
 
+    public static final String FIND_BY_ID = "/findById/{idCategory}";
+
 }

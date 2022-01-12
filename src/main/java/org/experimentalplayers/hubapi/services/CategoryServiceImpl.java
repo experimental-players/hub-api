@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -35,14 +36,26 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category findByName(String name) {
 
-    	log.info("Begin findByName(name)... ProjectServiceImpl");
+    	log.debug("Begin findByName(name)... CategoryServiceImpl");
 
 		Optional<Category> optCat = catRepo.findAllByCodename(name);
         if(!optCat.isPresent())
             throw new NotFoundException();
 
-		log.info("End findByName(name)... ProjectServiceImpl");
+		log.debug("End findByName(name)... CategoryServiceImpl");
 		return optCat.get();
     }
+
+    @Override
+    public Category findById(UUID idCategory) {
+
+        log.debug("Begin findById(id)... CategoryServiceImpl");
+
+        Optional<Category> optCat = catRepo.findCategoryById(idCategory);
+        if(!optCat.isPresent())
+            throw new NotFoundException();
+
+        log.debug("End findById(id)... CategoryServiceImpl");
+        return optCat.get();    }
 
 }

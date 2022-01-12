@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 
 /**
  * <h2>Application sub-API</h2>
@@ -23,12 +25,12 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController()
 @RequestMapping(CategoryMappings.ROOT)
-public class CategoryController extends BaseController{
+public class CategoryController extends BaseController {
 
-	@Autowired
-	CategoryService categoryService;
+    @Autowired
+    CategoryService categoryService;
 
-	/**
+    /**
      * Find all applications.
      *
      * <br>
@@ -41,16 +43,16 @@ public class CategoryController extends BaseController{
 
     @GetMapping(CategoryMappings.FIND_ALL)
     public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
-                                               @RequestParam(defaultValue = "10") Integer limit) {
+                                 @RequestParam(defaultValue = "10") Integer limit) {
 
         log.info("Begin findAll()...");
 
-		Page<Category> categoryPage = categoryService.findAll(page,limit);
+        Page<Category> categoryPage = categoryService.findAll(page, limit);
 
         log.info(categoryPage.toString());
 
         log.info("End findAll()...");
-		return new HttpEntity<>(categoryPage);
+        return new HttpEntity<>(categoryPage);
 
     }
 
@@ -60,10 +62,23 @@ public class CategoryController extends BaseController{
 
         log.info("Begin findByName()...");
 
-       Category category = categoryService.findByName(name);
+        Category category = categoryService.findByName(name);
 
         log.info("End findByName()...");
-		return new HttpEntity<>(category);
+        return new HttpEntity<>(category);
+
+    }
+
+
+    @GetMapping(CategoryMappings.FIND_BY_ID)
+    public HttpEntity<?> findById(@PathVariable UUID idCategory) throws NotFoundException {
+
+        log.info("Begin findById()...");
+
+        Category category = categoryService.findById(idCategory);
+
+        log.info("End findById()...");
+        return new HttpEntity<>(category);
 
     }
 
