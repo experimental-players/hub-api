@@ -83,7 +83,7 @@ class CategoryTests {
 		Map<String, Project> mockProjects = mockValues.getProjects();
 
 		when(catRepo.findAll()).thenReturn((List<Category>) mockCategories.values());
-		when(projRepo.findAll()).thenReturn((List<Project>) mockProjects.values());
+//		when(projRepo.findAll()).thenReturn((List<Project>) mockProjects.values());
 
 		when(catRepo.findAllByCodename(anyString())).thenAnswer(invocation -> Optional.of(mockCategories.get(invocation.getArgument(
 				0,

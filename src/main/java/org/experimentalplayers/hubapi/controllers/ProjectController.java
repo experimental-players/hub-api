@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 /**
  * <h2>Application sub-API</h2>
  * <p>
@@ -22,22 +24,27 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping(ProjectMappings.ROOT)
-public class ProjectController extends BaseController{
+public class ProjectController extends BaseController {
 
 	@Autowired
-	ProjectService projectService;
+	private ProjectService projectService;
 
 	@GetMapping(ProjectMappings.FIND_ALL)
 	public HttpEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
-			@RequestParam(defaultValue = "10") Integer limit) {
+			@RequestParam(defaultValue = "10") Integer limit, @RequestParam(required = false) UUID categoryId) {
 
-		log.info("Begin findAll()...");
+		log.debug("Begin findAll()...");
 
-		Page<Project> projectPage = projectService.findAll(page, limit);
+		Page<Project> projectPage;
 
-		log.info(projectPage.toString());
+		if(categoryId == null)
+			projectPage = projectService.findAll(page, limit);
+		else
+			projectPage = projectService.findAllByCategory(categoryId, page, limit);
 
-		log.info("End findAll()...");
+		log.debug(projectPage.toString());
+
+		log.debug("End findAll()...");
 		return new HttpEntity<>(projectPage);
 
 	}

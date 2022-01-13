@@ -13,31 +13,42 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
-    @Autowired
-    private ProjectRepository projRepo;
+	@Autowired
+	private ProjectRepository projRepo;
 
-    @Override
-    public Page<Project> findAll(Integer page, Integer limit) {
+	@Override
+	public Page<Project> findAll(Integer page, Integer limit) {
 
-		log.info("Begin findAll()... ProjectServiceImpl");
+		log.debug("Begin findAll()... ProjectServiceImpl");
 
+		Page<Project> projects = projRepo.findAll(new PageUtil(limit, page));
 
-		Pageable pageable = new PageUtil(limit,page);
+		log.debug("End findAll()... ProjectServiceImpl");
+		return projects;
+	}
 
-        List<Project> projects = projRepo.findAll();
+	public Page<Project> findAllByCategory(UUID categoryId, Integer page, Integer limit) {
+
+		log.debug("Begin findAllByCategory()... ProjectServiceImpl");
+
+		Pageable pageable = new PageUtil(limit, page);
+
+		List<Project> projects = projRepo.findAllByCategory_Id(categoryId);
 		Page<Project> pageProject = new PageImpl<>(projects, pageable, projects.size());
 
-		log.info("End findAll()... ProjectServiceImpl");
+		log.debug("End findAll()... ProjectServiceImpl");
 		return pageProject;
-    }
 
-    @Override
-    public Project findByName(String name) {
+	}
+
+	@Override
+	public Project findByName(String name) {
 
 		log.info("Begin findByName(name)... ProjectServiceImpl");
 
@@ -47,6 +58,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 		log.info("End findByName(name)... ProjectServiceImpl");
 		return optProj.get();
-    }
+	}
 
 }
