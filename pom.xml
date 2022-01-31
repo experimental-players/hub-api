@@ -11,9 +11,14 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
+	<scm>
+		<connection>scm:git:https://github.com/experimental-players/hub-api</connection>
+	</scm>
+
 	<groupId>org.experimentalplayers</groupId>
 	<artifactId>hub-api</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<name>hub-api</name>
 	<description>The Spring-based application that powers our HUB's API</description>
