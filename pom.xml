@@ -12,7 +12,7 @@
 	</parent>
 
 	<scm>
-		<connection>scm:git:https://github.com/experimental-players/hub-api</connection>
+		<connection>scm:git:https://github.com/experimental-players/hub-api/releases</connection>
 	</scm>
 
 	<groupId>org.experimentalplayers</groupId>
