@@ -10,13 +10,12 @@
 	</parent>
 
 	<scm>
-		<connection>scm:git:https://github.com/experimental-players/hub-api/tags</connection>
-	  <tag>hub-api-0.1.0</tag>
-  </scm>
+		<connection>scm:git:https://github.com/experimental-players/hub-api</connection>
+  	</scm>
 
 	<groupId>org.experimentalplayers</groupId>
 	<artifactId>hub-api</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>hub-api</name>
@@ -178,7 +177,7 @@
 				<artifactId>maven-scm-plugin</artifactId>
 				<version>1.5</version>
 				<configuration>
-					<tagBase>http://</tagBase>
+					<tagBase>http//github.com/experimental-players/hub-api/tags</tagBase>
 					<tag>${project.artifactId}.${project.version}</tag>
 				</configuration>
 				<executions>
