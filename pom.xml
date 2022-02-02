@@ -10,7 +10,7 @@
 	</parent>
 
 	<scm>
-		<connection>scm:git:https://github.com/experimental-players/hub-api/releases</connection>
+		<connection>scm:git:https://github.com/experimental-players/hub-api/tags</connection>
 	  <tag>hub-api-0.1.0</tag>
   </scm>
 
@@ -180,7 +180,6 @@
 				<configuration>
 					<tagBase>http://</tagBase>
 					<tag>${project.artifactId}.${project.version}</tag>
-					<!-- will create tag on http://svnserver/project/tags/tag-test.1.0.0.xxx -->
 				</configuration>
 				<executions>
 					<execution>
