@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.5.3</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<scm>
-		<connection>scm:git:https://github.com/experimental-players/hub-api/tags</connection>
-	  <tag>hub-api-0.1.0</tag>
-  </scm>
+		<connection>scm:git:https://github.com/experimental-players/hub-api</connection>
+		<tag>HEAD</tag>
+	</scm>
 
 	<groupId>org.experimentalplayers</groupId>
 	<artifactId>hub-api</artifactId>
-	<version>0.1.0</version>
-	<packaging>war</packaging>
+	<version>0.1.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<name>hub-api</name>
 	<description>The Spring-based application that powers our HUB's API</description>
@@ -61,7 +63,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.20</version>
+			<version>1.18.22</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -74,7 +76,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.2.20</version>
+			<version>42.2.25</version>
 		</dependency>
 
 		<!-- Environment -->
@@ -178,13 +180,15 @@
 				<artifactId>maven-scm-plugin</artifactId>
 				<version>1.5</version>
 				<configuration>
-					<tagBase>http://</tagBase>
+					<tagBase>http//github.com/experimental-players/hub-api/tags</tagBase>
 					<tag>${project.artifactId}.${project.version}</tag>
 				</configuration>
 				<executions>
 					<execution>
 						<id>create-tag</id>
-						<goals><goal>tag</goal></goals>
+						<goals>
+							<goal>tag</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
