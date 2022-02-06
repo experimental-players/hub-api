@@ -1,5 +1,8 @@
 # HUB-API
 
+![banner](https://static.experimentalplayers.org/hub-banner.jpg)
+
+
 The Spring-based application that powers our HUB's API.
 
 ## Tools
