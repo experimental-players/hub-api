@@ -25,7 +25,7 @@ public class InputType {
 
 	@Id
 	@Column(name = "id_type")
-	private UUID id;
+	private Integer id;
 
 	@Column(name = "description")
 	private String description;

@@ -39,7 +39,7 @@ public class BotInput implements Serializable {
     private UUID idInput;
 
     @Column(name = "id_type")
-    private UUID idType;
+    private Integer idType;
 
     @Override
     public boolean equals(Object o) {

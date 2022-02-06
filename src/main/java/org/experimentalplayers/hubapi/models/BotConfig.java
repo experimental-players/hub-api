@@ -28,12 +28,13 @@ public class BotConfig implements Serializable {
     @Column(name = "id_server")
     private Long idServer;
 
+    @Id
     @Column(name = "id_input")
-    private UUID idInput;
+    private Integer idInput;
 
     @Lob
     @Column(name = "id_content", columnDefinition = "BLOB")
-    private byte[] idContent;
+    private byte[] content;
 
     @Override
     public boolean equals(Object o) {
