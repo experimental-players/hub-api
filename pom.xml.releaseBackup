@@ -11,6 +11,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/experimental-players/hub-api</connection>
+		<tag>hub-api-0.1.1</tag>
 	</scm>
 
 	<groupId>org.experimentalplayers</groupId>
