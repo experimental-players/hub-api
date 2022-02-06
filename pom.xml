@@ -178,7 +178,7 @@
 				<artifactId>maven-scm-plugin</artifactId>
 				<version>1.5</version>
 				<configuration>
-					<tagBase>http//github.com/experimental-players/hub-api/tags</tagBase>
+					<tagBase>http://github.com/experimental-players/hub-api/tags</tagBase>
 					<tag>${project.artifactId}.${project.version}</tag>
 				</configuration>
 				<executions>
