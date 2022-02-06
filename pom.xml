@@ -10,13 +10,12 @@
 	</parent>
 
 	<scm>
-		<connection>scm:git:https://github.com/experimental-players/hub-api</connection>
-	  <tag>hub-api-0.1.1</tag>
+		<connection>scm:git:https://github.com/experimental-players/hub-api.git</connection>
   </scm>
 
 	<groupId>org.experimentalplayers</groupId>
 	<artifactId>hub-api</artifactId>
-	<version>0.1.1</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>hub-api</name>
@@ -181,14 +180,6 @@
 					<tagBase>http://github.com/experimental-players/hub-api/tags</tagBase>
 					<tag>${project.artifactId}.${project.version}</tag>
 				</configuration>
-				<executions>
-					<execution>
-						<id>create-tag</id>
-						<goals>
-							<goal>tag</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 		</plugins>
