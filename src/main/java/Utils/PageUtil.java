@@ -24,7 +24,7 @@ public class PageUtil implements Pageable {
 		this.limit = Math.min(limit, 100);
 		this.sort = sort;
 
-		if(limit < 1)
+		if (limit < 1)
 			throw new IllegalArgumentException("Limit must not be less than one!");
 
 		offset = (page > 0) ? this.limit * (page - 1) : 0;
